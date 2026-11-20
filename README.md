@@ -19,9 +19,9 @@ runs in your browser through [Pyodide](https://pyodide.org/) (WebAssembly), with
 |---|---|---|
 | M0 | Repo setup, plan, README, CI skeleton | ✅ done |
 | M1 | Properties: units, osmotic pressure (van’t Hoff + Pitzer), TCF, SEC_min | ✅ done |
-| M2 | Local solution–diffusion + film-model solver | ⏳ |
-| M3 | 1D RK4 vessel model, convergence check, pinch detection | ⏳ |
-| M4 | Energy (SEC, ERD) and economics | ⏳ |
+| M2 | Local solution–diffusion + film-model solver | ✅ done |
+| M3 | 1D RK4 vessel model, convergence check, pinch detection | ✅ done |
+| M4 | Energy (SEC, ERD) and economics | ✅ done |
 | M5 | Independent SciPy reference implementation | ⏳ |
 | M6 | Validation results file for the page | ⏳ |
 | M7 | Page content and sources | ⏳ |
