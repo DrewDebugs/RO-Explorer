@@ -219,7 +219,7 @@ function baseLayout(xTitle, yTitle, extra = {}) {
                              linecolor: t.grid, tickfont: { size: 11 } });
   return {
     paper_bgcolor: "rgba(0,0,0,0)", plot_bgcolor: "rgba(0,0,0,0)",
-    font: { color: t.text, family: "system-ui, sans-serif", size: 12 },
+    font: { color: t.text, family: "Inter, system-ui, sans-serif", size: 12 },
     margin: { l: 56, r: 56, t: 10, b: 96 },
     xaxis: axis(xTitle), yaxis: axis(yTitle),
     legend: { orientation: "h", y: -0.2, yanchor: "top", x: 0, font: { size: 11 } },
