@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RO Desalination Explorer</title>
+<meta name="description" content="An interactive, AI-built teaching site on reverse osmosis desalination with a 1D pressure-vessel model that runs in the browser (Python via Pyodide).">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><path d='M16 3C11 11 7 16 7 21a9 9 0 0 0 18 0c0-5-4-10-9-18z' fill='%230b6e8a'/></svg>">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/katex.min.css" crossorigin="anonymous">
+<link rel="stylesheet" href="assets/style.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.3/plotly.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/pyodide/v314.0.7/full/pyodide.js" crossorigin="anonymous"></script>
+<script defer src="assets/app.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="#top">RO Explorer</a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#overview">1 Overview</a>
+      <a href="#industry">2 Industry</a>
+      <a href="#theory">3 Theory</a>
+      <a href="#app">4 Model</a>
+      <a href="#economics">5 Economics</a>
+      <a href="#validation">6 Validation</a>
+      <a href="#ailog">7 AI log</a>
+      <a href="#presentation">8 Presentation</a>
+      <a href="#references">9 References</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<div class="hero">
+  <h1>Reverse Osmosis Desalination Explorer</h1>
+  <p class="lede">How a seawater reverse osmosis pressure vessel turns salt water into drinking water,
+  why it can never recover all of it, and what the water costs. The model is written in
+  Python and runs in your browser.</p>
+</div>
+
+<!-- ===================================================================== 1 -->
+<section id="overview">
+<h2>1. Overview</h2>
+<div class="prose">
+<div class="callout ai">
+<strong>This is an AI project.</strong> The code, the model and the first draft of every text on
+this page were written by <strong>Claude (Anthropic), model Opus 5.5, working in Claude Code</strong>,
+for a Separation Processes course assignment. A human student directed the work, chose
+between options, and checks the sources. What is AI-generated and what is human-verified:
+<ul>
+<li><strong>AI-generated:</strong> the plan, the model (<code>ro_model.py</code>), the tests, the
+independent reference solver, this page and its text.</li>
+<li><strong>Checked automatically:</strong> the model against limiting cases with exact answers, an
+independent SciPy implementation, a closed-form solution and the second law (see
+<a href="#validation">§6</a>).</li>
+<li><strong>Human-verified:</strong> the cited numbers, using the checklist in
+<a href="https://github.com/DrewDebugs/RO-Explorer/blob/main/docs/sources-checklist.md"><code>docs/sources-checklist.md</code></a>.
+Numbers that have not been confirmed against their source yet carry a
+<span class="todo">TODO-VERIFY</span> badge.</li>
+</ul>
+The whole AI process (plan, critique, decisions, prompts) is in <a href="#ailog">§7</a>.
+</div>
+
+<p><strong>What you can do here.</strong> Read why reverse osmosis (RO) dominates desalination
+(<a href="#industry">§2</a>) and the physics behind it (<a href="#theory">§3</a>). Then change the feed,
+the membrane and the operating pressure of one pressure vessel and watch the flux, salt
+concentrations and pressures change along it (<a href="#app">§4</a>). See the energy it uses
+compared with the thermodynamic minimum, and what the water costs (<a href="#economics">§5</a>).</p>
+
+<p><strong>How it works.</strong> The page loads <a href="https://pyodide.org/">Pyodide</a>, a
+version of Python compiled to WebAssembly, then fetches <code>ro_model.py</code> from this site
+and runs it on your device. No server does any computation. The same file is tested on every
+change by the automated tests, so the model you use is exactly the model that was checked.</p>
+</div>
+</section>
+
+<!-- ===================================================================== 2 -->
+<section id="industry">
+<h2>2. Why reverse osmosis matters</h2>
+<div class="prose">
+<p>A 2019 global survey counted <strong>15,906 operational desalination plants</strong> producing about
+<strong>95 million m³ of fresh water per day</strong>, with <strong>48 %</strong> of it made in the Middle
+East and North Africa <a class="cite" href="#ref-jones">[1]</a>. The same plants discharge about
+<strong>142 million m³/day of brine</strong> <a class="cite" href="#ref-jones">[1]</a>, the concentrated
+salt stream that is the unavoidable by-product of desalination (and that our model computes).</p>
+
+<p>Membrane processes, almost all of them reverse osmosis, now produce about
+<strong>69 % of global desalination capacity</strong> <a class="cite" href="#ref-woa">[2]</a>
+<span class="todo">TODO-VERIFY</span>, having overtaken thermal distillation. The reason is energy:
+thermal plants boil water, while RO only has to push it through a membrane against the
+osmotic pressure.</p>
+
+<h3>The largest RO plants</h3>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Plant</th><th>Country</th><th class="num">Capacity (m³/day)</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td>Taweelah</td><td>UAE (Abu Dhabi)</td><td class="num">909,200</td><td>Full output reached 2022–23; described by its operator as the world’s largest RO plant <a class="cite" href="#ref-taweelah">[3]</a></td></tr>
+<tr><td>Sorek 2 (Be’er Miriam)</td><td>Israel</td><td class="num">≈ 670,000</td><td>In operation 2025 <a class="cite" href="#ref-sorek2">[4]</a></td></tr>
+<tr><td>Sorek</td><td>Israel</td><td class="num">624,000</td><td>Opened 2013 <a class="cite" href="#ref-sorek">[5]</a></td></tr>
+<tr><td>Carlsbad (Claude “Bud” Lewis)</td><td>USA (California)</td><td class="num">≈ 189,000 (50 million US gal)</td><td>Largest in the Western Hemisphere; 144 pressure exchangers <a class="cite" href="#ref-carlsbad">[6]</a></td></tr>
+</tbody>
+</table>
+</div>
+<p>A plant of Taweelah’s size runs thousands of pressure vessels in parallel. The model on
+this page simulates <em>one</em> of those vessels and then scales up by counting vessels.</p>
+
+<h3>Energy: the number that decides everything</h3>
+<p>Separating fresh water from 35 g/L seawater at 50 % recovery needs at least about
+<strong>1.06 kWh per m³</strong> of fresh water, a limit set by thermodynamics, not by technology
+<a class="cite" href="#ref-elimelech">[7]</a> <span class="todo">TODO-VERIFY</span>. Real plants use
+more, partly because a real stage must push harder than the minimum (see the
+<a href="#theory-pinch">pinch</a> in §3). Most of the pressure energy in the brine is recovered with
+isobaric <strong>pressure exchangers</strong>, which transfer about <strong>95–97 %</strong> of it to
+the incoming feed <a class="cite" href="#ref-erd">[8]</a>. At Carlsbad these devices cut the energy use of
+the RO process by <strong>46 %</strong>, saving an estimated <strong>146 million kWh per year</strong>
+<a class="cite" href="#ref-carlsbad">[6]</a>.</p>
+
+<h3>Who makes the membranes</h3>
+<p>Nearly all RO membranes are thin-film composite polyamide films rolled into
+<strong>spiral-wound elements</strong>, typically 8 inches across and 40 inches long with about
+440 ft² (40.9 m²) of membrane <a class="cite" href="#ref-element">[9]</a>. Major suppliers include DuPont
+(FilmTec) <a class="cite" href="#ref-element">[9]</a>, Toray, which supplied the Taweelah membranes
+<a class="cite" href="#ref-toray">[10]</a>, Nitto (Hydranautics) <a class="cite" href="#ref-hydranautics">[11]</a> and
+LG Chem <a class="cite" href="#ref-lgchem">[12]</a>.</p>
+
+<h3>Where RO is used</h3>
+<ul>
+<li><strong>Seawater desalination (SWRO)</strong>: about 35 g/L feed <a class="cite" href="#ref-millero">[16]</a>, high pressure (the default case here).</li>
+<li><strong>Brackish water (BWRO)</strong>: groundwater or estuaries with a few g/L of salt; much lower
+pressure and higher recovery (try the <em>Brackish</em> preset).</li>
+<li><strong>Potable reuse</strong>: purifying treated wastewater to drinking-water quality.</li>
+<li><strong>Ultrapure water</strong>: semiconductor fabs, power plants and pharmaceuticals, usually RO followed by further polishing.</li>
+</ul>
+</div>
+</section>
+
+<!-- ===================================================================== 3 -->
+<section id="theory">
+<h2>3. Theory</h2>
+<div class="prose">
+
+<h3>3.1 Osmotic pressure</h3>
+<p>Salt water has a lower chemical potential of water than pure water. Separated by a membrane
+that passes only water, pure water flows into the salt side until the salt side is at a
+higher pressure, the <strong>osmotic pressure</strong> \(\pi\). Reverse osmosis applies a pressure
+<em>above</em> \(\pi\) to drive water the other way. For dilute solutions the
+<strong>van’t Hoff</strong> equation gives</p>
+<div class="eq">\[ \pi = i\,\frac{C}{M}\,R\,T \]</div>
+<p>with \(i = 2\) ions per NaCl, \(C\) the salt concentration in g/L (= kg/m³) and \(M = 58.44\)
+g/mol. For 35 g/L at 25 °C this gives <strong>29.7 bar</strong>. Real salt solutions are not ideal; the
+<strong>osmotic coefficient</strong> \(\varphi\) corrects this, \(\pi = \varphi\,\pi_{\text{van’t Hoff}}\). We use the
+<strong>Pitzer</strong> model for NaCl at 25 °C <a class="cite" href="#ref-pitzer">[13]</a>
+<span class="todo">TODO-VERIFY</span>:</p>
+<div class="eq">\[ \varphi - 1 = -A_\varphi\frac{\sqrt{m}}{1 + 1.2\sqrt{m}} + m\left(\beta^{(0)} + \beta^{(1)} e^{-2\sqrt{m}}\right) + m^2 C^{\varphi} \]</div>
+<p>with \(m\) the molality, \(A_\varphi = 0.392\), \(\beta^{(0)} = 0.0765\), \(\beta^{(1)} = 0.2664\) and
+\(C^\varphi = 0.00127\). It reproduces tabulated osmotic coefficients of NaCl to within 0.003 from
+0.1 to 3 mol/kg <a class="cite" href="#ref-robinson">[18]</a> <span class="todo">TODO-VERIFY</span> (check V03 in §6). At seawater strength \(\varphi \approx 0.92\), so van’t Hoff overestimates
+\(\pi\) by about 8 % (27.4 instead of 29.7 bar). The model uses van’t Hoff by default; the Pitzer
+switch in §4 shows the difference.</p>
+
+<h3>3.2 The membrane: solution–diffusion</h3>
+<p>Water and salt dissolve in the dense polyamide layer and diffuse across it independently.
+The water flux \(J_w\) is driven by the <em>net</em> driving pressure (NDP); the salt flux \(J_s\) by the
+concentration difference:</p>
+<div class="eq">\[ J_w = A\left[\Delta P - (\pi_m - \pi_p)\right],\qquad J_s = B\,(C_m - C_p),\qquad C_p = \frac{J_s}{J_w} \]</div>
+<p>\(A\) is the water permeance (L m⁻² h⁻¹ bar⁻¹, “LMH/bar”) and \(B\) the salt permeance (LMH). Seawater
+membranes trade a low \(A\) for a very low \(B\); brackish membranes are more open
+<a class="cite" href="#ref-werber">[14]</a> <span class="todo">TODO-VERIFY</span>. Because salt passage
+does not depend on pressure but water flux does, <strong>higher pressure gives purer water</strong>
+locally. Both permeances rise with temperature by a factor
+\(\text{TCF} = \exp[K(1/298 - 1/T)]\), with \(K = 2640\) K above 25 °C and 3020 K below
+<a class="cite" href="#ref-tcf">[15]</a> <span class="todo">TODO-VERIFY</span>.</p>
+
+<h3>3.3 Concentration polarisation</h3>
+<p>Water leaves through the membrane but salt is left behind, so salt piles up in a thin boundary
+layer. The concentration at the membrane surface \(C_m\) is higher than in the bulk \(C_b\).
+A film model with mass-transfer coefficient \(k\) gives</p>
+<div class="eq">\[ \frac{C_m - C_p}{C_b - C_p} = \exp\!\left(\frac{J_w}{k}\right) \]</div>
+<p>The ratio \(C_m/C_b\) is the <strong>CP factor</strong>. It raises \(\pi_m\), which lowers the flux and
+lets more salt through. Designers keep it below about 1.2 <span class="todo">TODO-VERIFY</span>.</p>
+<p><strong>How the model solves it.</strong> For a given \(J_w\) the three equations above give \(C_p\)
+and \(C_m\) in closed form:</p>
+<div class="eq">\[ C_p = \frac{B\,E\,C_b}{J_w + B\,E},\qquad C_m = C_p + (C_b - C_p)\,E,\qquad E = e^{J_w/k} \]</div>
+<p>so the local problem reduces to one equation in \(J_w\), solved with a bracketed root finder
+(Illinois method). A root is guaranteed: at zero flux a leaky membrane rejects nothing, so the
+residual is negative, and at \(J_w = A\Delta P\) it is positive.</p>
+
+<h3>3.4 One pressure vessel</h3>
+<p>An 8-inch pressure vessel holds several elements in series; we use 7 elements, 7.1 m and
+286 m² by default. Feed enters at one end and loses water as it flows; the brine leaves at
+the other end. Along the vessel coordinate \(x\), with \(W\) the membrane area per metre:</p>
+<div class="eq">\[ \frac{dQ}{dx} = -J_w W,\qquad \frac{d(Q\,C_b)}{dx} = -J_w C_p W,\qquad \frac{dP}{dx} = -\frac{\Delta P_{\text{drop}}}{L} \]</div>
+<p>At every point the local membrane problem gives \(J_w\) and \(C_p\). The equations are integrated
+with the 4th-order Runge–Kutta method; the number of steps is doubled until the results stop
+changing (relative change below 10⁻⁴). <strong>Recovery</strong> is \(r = Q_p/Q_f\), the fraction of the
+feed that becomes fresh water.</p>
+
+<h3 id="theory-pinch">3.5 The pinch: why recovery is limited</h3>
+<p>As water leaves, the brine gets saltier and its osmotic pressure rises. For an ideal membrane
+without polarisation, the brine at recovery \(r\) has \(\pi_b = \pi_f/(1 - r)\). Flux stops when
+\(\pi_b\) reaches the applied pressure, giving the <strong>single-stage recovery limit</strong></p>
+<div class="eq">\[ r_{\max} = 1 - \frac{\pi_f}{\Delta P} \]</div>
+<p>For seawater at 60 bar, \(r_{\max} \approx 50\,\%\). This is the RO version of a <strong>pinch</strong> in
+McCabe–Thiele analysis: there, an operating line that touches the equilibrium curve needs
+infinitely many stages; here, a pressure line that touches the rising brine osmotic-pressure
+curve needs infinite membrane area. Membrane added beyond the pinch produces almost
+nothing. Plot 3 in §4 shows the gap between \(P\) and \(\pi\) closing, and plot 6 shows recovery
+approaching \(r_{\max}\) as pressure changes.</p>
+<p>Two consequences that the model shows:</p>
+<ul>
+<li>With a <strong>leaky membrane</strong> (\(B > 0\)) the flux never quite stops. Instead the
+<em>rejection</em> collapses as the NDP approaches zero: the little water that still passes
+carries almost as much salt as the feed. Because some salt leaves with the permeate, the brine
+is slightly less concentrated than for an ideal membrane, so recovery can edge just past
+\(r_{\max}\), which is defined for an ideal membrane.</li>
+<li>At the vessel level, <strong>rejection is not always improved by more pressure</strong>.
+At the default 9 m³/h feed it peaks near 70 bar: beyond that, extra recovery concentrates the
+brine so much that the permeate made near the outlet is saltier. (The original plan expected
+rejection to rise steadily; the tests found otherwise.)</li>
+</ul>
+
+<h3>3.6 Energy</h3>
+<p>The high-pressure pump lifts all the feed to \(P_f\), but only the fraction \(r\) becomes product, so
+per m³ of permeate (1 bar on 1 m³ = 1/36 kWh):</p>
+<div class="eq">\[ \text{SEC}_{\text{no ERD}} = \frac{P_f}{\eta_p\,r},\qquad
+\text{SEC}_{\text{ERD}} = \frac{P_f - \eta_{\text{ERD}}\,(1-r)\,P_b}{\eta_p\,r} \]</div>
+<p>The second form includes an energy-recovery device that returns a fraction \(\eta_{\text{ERD}}\) of
+the brine’s pressure energy to the feed. The <strong>thermodynamic minimum</strong> for removing pure
+water reversibly is the average osmotic pressure seen while the brine concentrates:</p>
+<div class="eq">\[ \text{SEC}_{\min} = \frac{1}{r}\int_0^r \pi\!\left(\frac{C_f}{1-r'}\right)dr'
+\;\overset{\text{van’t Hoff}}{=}\; \frac{\pi_f}{r}\ln\frac{1}{1-r} \]</div>
+<p>A real membrane also lets salt through, which makes the separation easier, so we also compute
+the minimum work for the separation it <em>actually</em> makes (permeate \(C_p\), brine \(C_b\)), from a
+free-energy density \(g(c)\) consistent with \(\pi(c)\):</p>
+<div class="eq">\[ \text{SEC}_{\min,\text{actual}} = \frac{r\,g(C_p) + (1-r)\,g(C_b) - g(C_f)}{r},\qquad \pi = c\,g'(c) - g(c) \]</div>
+<p>The second law requires SEC ≥ SEC<sub>min,actual</sub>; the tests check this for hundreds of random
+cases. A single stage also needs at least the brine osmotic pressure at the outlet,
+\(\pi_f/(1-r)\), which is why real SWRO is well above the minimum.</p>
+
+<h3>3.7 What the model leaves out</h3>
+<ul>
+<li>Salt is NaCl only. Real seawater has many ions; its osmotic pressure is close to that of
+35 g/L NaCl but not identical (seawater salinity is about 35 g/kg <a class="cite" href="#ref-millero">[16]</a>).</li>
+<li>\(A\), \(B\) and \(k\) are constant along the vessel. In reality \(k\) falls as the cross-flow slows,
+and membranes compact under pressure.</li>
+<li>The vessel is one 1D channel: spacers, permeate-side pressure and channel geometry are not modelled.
+Element datasheets are used only for orders of magnitude.</li>
+<li><strong>Fouling and scaling</strong> are not modelled. In real plants they control the design:
+particles, organics and biofilms foul the membrane, and as brine concentrates, sparingly
+soluble salts (calcium carbonate, calcium sulfate) can precipitate on it. This is why plants
+need pretreatment and antiscalants, and why recovery is often limited below the pinch. The
+model warns when the brine gets very concentrated.</li>
+<li>The van’t Hoff and Pitzer models estimate molality from g/L and ignore the temperature
+dependence of the Pitzer parameters.</li>
+</ul>
+</div>
+</section>
+
+<!-- ===================================================================== 4 -->
+<section id="app">
+<h2>4. Interactive model of one pressure vessel</h2>
+
+<div class="loader" id="loader">
+  <div class="bar"><div id="loader-bar"></div></div>
+  <div class="msg" id="loader-msg">Waiting for the page to load…</div>
+</div>
+
+<div class="app">
+  <aside class="panel controls" id="controls" aria-label="Model inputs">
+    <h4>Presets</h4>
+    <div class="presets">
+      <button type="button" data-preset="seawater" disabled>Seawater</button>
+      <button type="button" data-preset="brackish" disabled>Brackish</button>
+      <button type="button" data-preset="pinch" disabled>Pinch demo</button>
+    </div>
+    <div id="ctl-vessel"></div>
+    <div class="status" id="run-status"></div>
+  </aside>
+
+  <div>
+    <div class="cards" id="cards"></div>
+    <div class="warnings" id="warnings" aria-live="polite"></div>
+    <div class="plots">
+      <div class="plot-card"><h5>1. Water flux and local rejection</h5><p class="cap">Flux falls as the net driving pressure shrinks, and rejection falls with it.</p><div class="plot" id="plot-flux"></div></div>
+      <div class="plot-card"><h5>2. Concentrations</h5><p class="cap">Bulk, membrane surface and local permeate (right axis).</p><div class="plot" id="plot-conc"></div></div>
+      <div class="plot-card"><h5>3. Pressure vs osmotic pressure</h5><p class="cap">The shaded gap is the NDP; where it closes is the pinch.</p><div class="plot" id="plot-pressure"></div></div>
+      <div class="plot-card"><h5>4. Concentration polarisation</h5><p class="cap">C<sub>m</sub>/C<sub>b</sub>; highest where the flux is highest.</p><div class="plot" id="plot-cp"></div></div>
+      <div class="plot-card"><h5>5. Specific energy</h5><p class="cap">Pump energy vs thermodynamic bounds (kWh per m³ of permeate).</p><div class="plot" id="plot-sec"></div></div>
+      <div class="plot-card"><h5>6. Recovery vs feed pressure</h5><p class="cap">Recovery approaches the single-stage limit r<sub>max</sub> (dashed); a leaky membrane can edge just past it.</p><div class="plot" id="plot-sweep"></div></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ===================================================================== 5 -->
+<section id="economics">
+<h2>5. Economics</h2>
+<div class="prose">
+<p>The vessel results are scaled to a whole plant by counting vessels:
+\(n_{\text{vessels}} = \lceil Q_{\text{plant}} / (24\,Q_{p,\text{vessel}}) \rceil\). Capital cost is the
+membranes, pressure vessels and high-pressure pumps with energy recovery, multiplied by an
+“other plant” factor for the intake, pretreatment, outfall, buildings and engineering. It is
+annualised with the capital recovery factor</p>
+<div class="eq">\[ \text{CRF} = \frac{i\,(1+i)^n}{(1+i)^n - 1} \]</div>
+<p>and added to electricity (SEC × price), membrane replacement and fixed operation and maintenance.
+<strong>This is a teaching model, not a cost estimate.</strong> The default unit costs are
+illustrative <span class="todo">TODO-VERIFY</span>; change them to see what drives the price.
+For comparison, large SWRO plants are reported to produce water for roughly
+<strong>$0.50–1.00 per m³</strong>, depending on site, energy price and financing
+<a class="cite" href="#ref-ghaffour">[17]</a>. The SEC here counts only the RO pumps, not intake,
+pretreatment or post-treatment, so it underestimates the plant total.</p>
+</div>
+<div class="econ">
+  <aside class="panel controls" aria-label="Economic inputs"><div id="ctl-econ"></div></aside>
+  <div>
+    <div class="cards" id="econ-cards"></div>
+    <div class="plot-card"><h5>Water cost breakdown</h5><p class="cap">Levelised $ per m³ of permeate.</p><div class="plot" id="plot-cost"></div></div>
+    <div class="table-wrap" id="econ-table"></div>
+  </div>
+</div>
+</section>
+
+<!-- ===================================================================== 6 -->
+<section id="validation">
+<h2>6. Validation</h2>
+<div class="prose">
+<p>How do we know the model is right? Every change to the code runs an automated test suite on
+GitHub. It checks the model against <strong>exact answers in limiting cases</strong>, a
+<strong>closed-form solution</strong>, an <strong>independent implementation</strong> written with SciPy,
+<strong>published values</strong> and the <strong>second law of thermodynamics</strong>. The site is only
+published if every test passes. The table shows the shared checks; the CI column is from the
+last automated run, and the button runs the same checks here, in your browser, with the same
+Python file. (Checks V13 and V14 use fewer cases in the browser to keep them quick.)</p>
+</div>
+<p class="meta" id="ci-meta">Loading CI results…</p>
+<p><button type="button" class="primary" id="rerun" disabled>Re-run checks in your browser</button>
+<span class="meta" id="rerun-status"></span></p>
+<div class="table-wrap" id="validation-table"></div>
+<details>
+<summary>All automated tests from the last CI run</summary>
+<div class="table-wrap" id="tests-table"></div>
+</details>
+</section>
+
+<!-- ===================================================================== 7 -->
+<section id="ailog">
+<h2>7. AI log</h2>
+<div class="prose">
+<p>This project was built with an AI coding agent. The process is recorded in the repository so
+that it can be checked:</p>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Step</th><th>Document</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>1. Plan, written by Claude before any code (kept exactly as approved)</td><td><a href="https://github.com/DrewDebugs/RO-Explorer/blob/main/docs/ai-log/01-plan.md"><code>01-plan.md</code></a></td><td>Done</td></tr>
+<tr><td>2. Critique of the plan by a second AI model</td><td><a href="https://github.com/DrewDebugs/RO-Explorer/blob/main/docs/ai-log/02-critique.md"><code>02-critique.md</code></a></td><td id="critique-status">To be added by the student</td></tr>
+<tr><td>3. Decisions: every change from the plan, and accept/reject of the critique</td><td><a href="https://github.com/DrewDebugs/RO-Explorer/blob/main/docs/ai-log/03-decisions.md"><code>03-decisions.md</code></a></td><td>Ongoing</td></tr>
+<tr><td>4. Comparison of two independent implementations</td><td><a href="https://github.com/DrewDebugs/RO-Explorer/blob/main/docs/ai-log/04-implementation-comparison.md"><code>04-implementation-comparison.md</code></a></td><td>Done</td></tr>
+<tr><td>5. Prompts, verbatim</td><td><a href="https://github.com/DrewDebugs/RO-Explorer/tree/main/docs/ai-log/prompts"><code>prompts/</code></a></td><td>To be added by the student</td></tr>
+<tr><td>Sources checklist (every number → source → verified?)</td><td><a href="https://github.com/DrewDebugs/RO-Explorer/blob/main/docs/sources-checklist.md"><code>sources-checklist.md</code></a></td><td>Awaiting human check</td></tr>
+</tbody>
+</table>
+</div>
+<h3>What the tests caught</h3>
+<p>Writing the tests before trusting the model found things the plan got wrong. Three examples
+from the decisions log:</p>
+<ul>
+<li>The plan expected observed rejection to rise steadily with feed pressure. The vessel model
+showed a maximum near 70 bar (§3.5); the explanation was kept as a teaching point.</li>
+<li>The plan’s root-finder tolerance (10⁻¹² m/s) was too loose to show the 4th-order convergence of
+the Runge–Kutta method; it was tightened to 10⁻¹⁶ m/s.</li>
+<li>A test of the recovery limit with 1000× the membrane area failed because the pinch happened
+within millimetres, which the grid could not resolve. With 10× the area, the model matches
+\(r_{\max}\) to better than 10⁻⁶.</li>
+</ul>
+</div>
+</section>
+
+<!-- ===================================================================== 8 -->
+<section id="presentation">
+<h2>8. Presentation</h2>
+<div class="prose">
+<p>A short video walk-through of the project.</p>
+</div>
+<!-- To add the video: put the YouTube video ID in data-youtube-id, e.g. data-youtube-id="dQw4w9WgXcQ".
+     It is embedded from youtube-nocookie.com (no tracking cookies until played). -->
+<div class="video" id="video" data-youtube-id="">
+  <p class="meta">Video coming soon.</p>
+</div>
+<h3>Transcript</h3>
+<div class="transcript" id="transcript">
+  <p class="meta">The transcript will appear here once the video is published.</p>
+</div>
+</section>
+
+<!-- ===================================================================== 9 -->
+<section id="references">
+<h2>9. References and credits</h2>
+<div class="prose">
+<ol class="refs">
+<li id="ref-jones">Jones, E., Qadir, M., van Vliet, M. T. H., Smakhtin, V. &amp; Kang, S. (2019). The state of desalination and brine production: A global outlook. <em>Science of the Total Environment</em>, 657, 1343–1356. <a href="https://doi.org/10.1016/j.scitotenv.2018.12.076">doi:10.1016/j.scitotenv.2018.12.076</a></li>
+<li id="ref-woa">United Nations. <em>Third World Ocean Assessment</em>, Section 5a, Chapter 8: Desalination and salt production. <a href="https://woa.un.org/third-world-ocean-assessment/socioecological-systems/sustainable-and-inclusive-ocean-economy/chapter-8-desalination">woa.un.org</a> <span class="todo">TODO-VERIFY</span></li>
+<li id="ref-taweelah">ACWA Power. Taweelah RO Desalination IWP (project page). <a href="https://acwapower.com/en/projects/taweelah-ro-desalination-iwp/">acwapower.com</a>; EWEC capacity announcements, 2022–2023.</li>
+<li id="ref-sorek2">IDE Water Technologies (18 March 2025). IDE Water Technologies pioneers sustainable desalination with Sorek 2 – Be’er Miriam (press release). <a href="https://ide-tech.com/en/ide-water-technologies-pioneers-sustainable-desalination-with-sorek-2-beer-miriam/">ide-tech.com</a></li>
+<li id="ref-sorek">WaterWorld. Largest SWRO desalination plant in the world operational in Israel (Sorek). <a href="https://www.waterworld.com/home/article/16207862/largest-swro-desalination-plant-in-the-world-operational-in-israel">waterworld.com</a></li>
+<li id="ref-carlsbad">San Diego County Water Authority. Seawater desalination: Claude “Bud” Lewis Carlsbad Desalination Plant. <a href="https://www.sdcwa.org/?p=950">sdcwa.org</a></li>
+<li id="ref-elimelech">Elimelech, M. &amp; Phillip, W. A. (2011). The future of seawater desalination: energy, technology, and the environment. <em>Science</em>, 333(6043), 712–717. <a href="https://doi.org/10.1126/science.1200488">doi:10.1126/science.1200488</a></li>
+<li id="ref-erd">Review of isobaric energy recovery devices (95–97 % efficiency): Frontiers in Sustainable Cities (2020), mini review. <a href="https://doi.org/10.3389/frsc.2020.00009">doi:10.3389/frsc.2020.00009</a> <span class="todo">TODO-VERIFY authors</span></li>
+<li id="ref-element">DuPont Water Solutions. FilmTec™ seawater reverse osmosis 8″ elements (SW30 series): 440 ft² active area, 1,200 psi (83 bar) maximum pressure. <a href="https://www.dupont.com/products/filmtecsw30hrle440.html">dupont.com</a> <span class="todo">TODO-VERIFY datasheet</span></li>
+<li id="ref-toray">WaterWorld. Toray wins membrane order for largest seawater desalination plant. <a href="https://www.waterworld.com/drinking-water-treatment/press-release/14276387/toray-wins-membrane-order-for-largest-seawater-desalination-plant">waterworld.com</a></li>
+<li id="ref-hydranautics">Hydranautics (Nitto). RO system data normalization, technical service bulletin. <a href="https://www.lenntech.com/data-sheets/Hydranautics-normaliz-L.pdf">lenntech.com (PDF)</a></li>
+<li id="ref-lgchem">LG Chem Water Solutions. Technical service bulletin. <a href="https://lgwatersolutions.com/wp-content/uploads/2025/01/LG-Chem-TSB_ENG_Public_111.pdf">lgwatersolutions.com (PDF)</a></li>
+<li id="ref-pitzer">Pitzer, K. S. &amp; Mayorga, G. (1973). Thermodynamics of electrolytes. II. Activity and osmotic coefficients for strong electrolytes with one or both ions univalent. <em>Journal of Physical Chemistry</em>, 77(19), 2300–2308. <a href="https://doi.org/10.1021/j100638a009">doi:10.1021/j100638a009</a></li>
+<li id="ref-werber">Werber, J. R., Osuji, C. O. &amp; Elimelech, M. (2016). Materials for next-generation desalination and water purification membranes. <em>Nature Reviews Materials</em>, 1, 16018. <a href="https://doi.org/10.1038/natrevmats.2016.18">doi:10.1038/natrevmats.2016.18</a></li>
+<li id="ref-tcf">FilmTec™ design equations and parameters (temperature correction factor). <a href="https://www.lenntech.com/data-sheets/filmtec-design-equations-l.pdf">lenntech.com (PDF)</a></li>
+<li id="ref-millero">Millero, F. J., Feistel, R., Wright, D. G. &amp; McDougall, T. J. (2008). The composition of Standard Seawater and the definition of the Reference-Composition Salinity Scale. <em>Deep-Sea Research I</em>, 55(1), 50–72. <a href="https://doi.org/10.1016/j.dsr.2007.10.001">doi:10.1016/j.dsr.2007.10.001</a></li>
+<li id="ref-ghaffour">Ghaffour, N., Missimer, T. M. &amp; Amy, G. L. (2013). Technical review and evaluation of the economics of water desalination: current and future challenges for better water supply sustainability. <em>Desalination</em>, 309, 197–207. <a href="https://doi.org/10.1016/j.desal.2012.10.015">doi:10.1016/j.desal.2012.10.015</a> <span class="todo">TODO-VERIFY</span></li>
+<li id="ref-robinson">Robinson, R. A. &amp; Stokes, R. H. (1949). Tables of osmotic and activity coefficients of electrolytes in aqueous solution at 25 °C. <em>Transactions of the Faraday Society</em>, 45, 612–624. <a href="https://doi.org/10.1039/TF9494500612">doi:10.1039/TF9494500612</a> (used in the validation tests)</li>
+</ol>
+
+<h3>Software</h3>
+<ul>
+<li><a href="https://pyodide.org/">Pyodide</a> 314.0.7 (Python 3.14 in WebAssembly), Mozilla Public License 2.0.</li>
+<li><a href="https://numpy.org/">NumPy</a> 2.4.6, BSD license.</li>
+<li><a href="https://plotly.com/javascript/">Plotly.js</a> 2.35.3, MIT license.</li>
+<li><a href="https://katex.org/">KaTeX</a> 0.16.47, MIT license.</li>
+<li>Tests: <a href="https://scipy.org/">SciPy</a> 1.18.0 (independent reference solver) and <a href="https://pytest.org/">pytest</a> 9.2.0.</li>
+</ul>
+
+<h3>AI attribution and license</h3>
+<p>Built by Claude (Anthropic, model Opus 5.5) in Claude Code, directed and checked by a student.
+Source code: <a href="https://github.com/DrewDebugs/RO-Explorer">github.com/DrewDebugs/RO-Explorer</a>.
+Code is MIT-licensed; text and figures are CC BY 4.0.</p>
+</div>
+</section>
+
+</main>
+
+<footer>
+RO Desalination Explorer · an AI-built teaching project · <a href="https://github.com/DrewDebugs/RO-Explorer">source on GitHub</a>
+</footer>
+
+</body>
+</html>
