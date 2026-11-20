@@ -34,19 +34,23 @@ tight tolerance (10⁻⁸).
 
 | Case | Recovery | RK4 steps | Max rel. diff (default) | Max rel. diff (tight) | Largest in |
 |---|---|---|---|---|---|
-| Seawater default (35 g/L, 60 bar, 9 m³/h) | 44.65 % | 100 | 2.5 × 10⁻⁹ | 2.5 × 10⁻⁹ | C_p |
-| Seawater, Pitzer | 47.92 % | 100 | 3.9 × 10⁻⁹ | 2.5 × 10⁻¹⁰ | C_p |
-| Brackish (3 g/L, 15 bar, A = 5 LMH/bar) | 83.43 % | 100 | 2.0 × 10⁻⁷ | 7.7 × 10⁻¹⁰ | C_p |
-| Strong polarisation (k = 40 LMH, 70 bar) | 43.06 % | 100 | 2.8 × 10⁻¹⁰ | 2.8 × 10⁻¹⁰ | C_p |
-| Warm (35 °C), no pressure drop | 47.18 % | 100 | 5.8 × 10⁻⁹ | 3.9 × 10⁻¹⁰ | C_p |
-| Near pinch (45 bar, 4 m³/h) | 35.24 % | 100 | 6.8 × 10⁻⁹ | 4.4 × 10⁻¹⁰ | C_p |
+| Seawater default (35 g/L, 60 bar, 12 m³/h, A = 1.4, B = 0.05) | 43.72 % | 100 | 2.8 × 10⁻⁹ | 2.8 × 10⁻⁹ | C_p |
+| Seawater, Pitzer | 47.00 % | 100 | 4.2 × 10⁻⁹ | 2.6 × 10⁻¹⁰ | C_p |
+| Brackish (3 g/L, 15 bar, A = 5 LMH/bar) | 80.08 % | 100 | 5.3 × 10⁻⁸ | 3.3 × 10⁻⁹ | C_p |
+| Strong polarisation (k = 40 LMH, 70 bar) | 38.85 % | 100 | 1.1 × 10⁻¹⁰ | 1.1 × 10⁻¹⁰ | C_p |
+| Warm (35 °C), no pressure drop | 45.81 % | 100 | 6.9 × 10⁻⁹ | 4.2 × 10⁻¹⁰ | C_p |
+| Near pinch (45 bar, 4 m³/h) | 35.16 % | 100 | 3.3 × 10⁻⁸ | 2.4 × 10⁻⁹ | C_p |
 
 Ideal case against the closed-form solution (feed flow Q along the vessel):
 
 | Solver | Max rel. error vs exact |
 |---|---|
-| Browser solver (RK4, 100 steps) | 1.2 × 10⁻⁹ |
-| SciPy reference (DOP853) | 1.8 × 10⁻¹¹ |
+| Browser solver (RK4, 100 steps) | 1.4 × 10⁻⁹ |
+| SciPy reference (DOP853) | 1.2 × 10⁻¹¹ |
+
+*These numbers were regenerated after the default membrane was refitted to the FilmTec SW30HRLE-440
+datasheet (decision D29). The first run, with the original defaults (A = 1.0, B = 0.10 LMH, 9 m³/h), gave
+the same picture: 2.8 × 10⁻¹⁰ to 2.0 × 10⁻⁷.*
 
 The plan's target was agreement better than 10⁻⁵. Every case beats it by at least two
 orders of magnitude, and the tests enforce < 10⁻⁵ (default) and < 10⁻⁸ (tight).
@@ -56,11 +60,11 @@ orders of magnitude, and the tests enforce < 10⁻⁵ (default) and < 10⁻⁸ (
 - **The local permeate concentration C_p is always the most sensitive quantity.** It is a
   small number computed from the flux through C_p = B·E·C_b/(J_w + B·E), so small flux
   differences show up most there.
-- **The brackish case is the least accurate at default settings (2 × 10⁻⁷).** At 83 %
-  recovery the brine concentrates sixfold along the vessel, so the profiles curve more and
+- **The brackish case is the least accurate at default settings (5 × 10⁻⁸).** At 80 %
+  recovery the brine concentrates fivefold along the vessel, so the profiles curve more and
   the 10⁻⁴ convergence check stops at a coarser grid. Tightening the tolerance removes the
   difference.
-- **Speed is similar in CPython:** 10–26 ms per case for either solver. The hand-written
+- **Speed is similar in CPython:** roughly 10–35 ms per case for either solver. The hand-written
   solver only needs numpy, which is why it is the one that runs in the browser (SciPy would
   add several MB to the page load).
 - Both solvers agree on the pinch behaviour: in the near-pinch case the local flux falls

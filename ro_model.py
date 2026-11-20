@@ -399,10 +399,10 @@ class VesselInputs:
 
     C_f: float = 35.0  # feed concentration, kg/m^3
     P_f: float = 60.0e5  # feed pressure (gauge), Pa
-    Q_f: float = 9.0 / 3600.0  # feed flow per vessel, m^3/s
+    Q_f: float = 12.0 / 3600.0  # feed flow per vessel, m^3/s
     T: float = T_REF  # K
-    A25: float = 1.0 * 2.7777777777777777e-12  # water permeance at 25 degC, m s^-1 Pa^-1
-    B25: float = 0.10 / 3.6e6  # salt permeance at 25 degC, m/s
+    A25: float = 1.4 * 2.7777777777777777e-12  # water permeance at 25 degC, m s^-1 Pa^-1 (fitted to FilmTec SW30HRLE-440)
+    B25: float = 0.05 / 3.6e6  # salt permeance at 25 degC, m/s (fitted to FilmTec SW30HRLE-440)
     k: float = 180.0 / 3.6e6  # mass-transfer coefficient, m/s
     n_elements: int = 7
     area_element: float = 40.9  # m^2 (440 ft^2)
@@ -760,10 +760,10 @@ UI_DEFAULTS = {
     # vessel
     "C_f": 35.0,  # g/L
     "P_f": 60.0,  # bar
-    "Q_f": 9.0,  # m^3/h per vessel
+    "Q_f": 12.0,  # m^3/h per vessel
     "T": 25.0,  # degC
-    "A": 1.0,  # LMH/bar at 25 degC
-    "B": 0.10,  # LMH at 25 degC
+    "A": 1.4,  # LMH/bar at 25 degC (datasheet fit, see sources checklist S12)
+    "B": 0.05,  # LMH at 25 degC (datasheet fit, S13)
     "k": 180.0,  # LMH
     "n_elements": 7,
     "dP_drop": 1.5,  # bar per vessel

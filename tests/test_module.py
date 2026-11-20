@@ -44,7 +44,7 @@ def test_permeate_equals_integrated_local_flux():
 
 def test_grid_convergence_order_is_four():
     ref = m.simulate_vessel(BASE, N=2048, fixed_N=True).recovery
-    errs = [abs(m.simulate_vessel(BASE, N=n, fixed_N=True).recovery - ref) for n in (2, 4, 8)]
+    errs = [abs(m.simulate_vessel(BASE, N=n, fixed_N=True).recovery - ref) for n in (4, 8, 16)]
     orders = [math.log2(errs[i] / errs[i + 1]) for i in range(2)]
     assert all(3.5 < p < 4.5 for p in orders), orders
 
@@ -92,7 +92,7 @@ def test_pressure_sweep_recovery_monotonic():
 def test_pressure_sweep_rejection():
     """At low recovery (16 m^3/h feed) observed rejection rises with pressure.
 
-    At the default 9 m^3/h it peaks near 70 bar and then falls: the extra
+    At the default 12 m^3/h it peaks near 75 bar and then falls: the extra
     recovery concentrates the brine, and permeate made from it is saltier.
     (The plan expected monotonic rejection at vessel level; see decisions log.)
     """
@@ -145,7 +145,7 @@ def _levels_and_text(inp):
 def test_warnings():
     assert "osmotic" in " ".join(t for _, t in m.check_warnings(replace(BASE, P_f=25e5)))
     assert "limit of" in _levels_and_text(replace(BASE, P_f=85e5))
-    assert "thermodynamic limit" in _levels_and_text(BASE)  # default is ~91 % of r_max
+    assert "thermodynamic limit" in _levels_and_text(replace(BASE, Q_f=9 / 3600))  # ~91 % of r_max
     brackish_extreme = replace(BASE, C_f=1.0, P_f=60e5, Q_f=2 / 3600,
                                A25=m.lmh_per_bar_to_si(8.0))
     text = _levels_and_text(brackish_extreme)

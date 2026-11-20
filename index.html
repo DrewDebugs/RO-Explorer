@@ -324,7 +324,9 @@ concentration difference:</p>
 <div class="eq">\[ J_w = A\left[\Delta P - (\pi_m - \pi_p)\right],\qquad J_s = B\,(C_m - C_p),\qquad C_p = \frac{J_s}{J_w} \]</div>
 <p>\(A\) is the water permeance (L m⁻² h⁻¹ bar⁻¹, “LMH/bar”) and \(B\) the salt permeance (LMH). Seawater
 membranes trade a low \(A\) for a very low \(B\); brackish membranes are more open
-<a class="cite" href="#ref-werber">[14]</a> <span class="todo">TODO-VERIFY</span>. Because salt passage
+<a class="cite" href="#ref-werber">[14]</a>. The seawater defaults here (\(A = 1.4\) LMH/bar, \(B = 0.05\) LMH) are fitted
+to the datasheet of a FilmTec SW30HRLE-440 element <a class="cite" href="#ref-element">[9]</a>, and FilmTec’s design equations give
+\(A \approx 3\) LMH/bar for brackish water, the value used in the brackish preset <a class="cite" href="#ref-tcf">[15]</a>. Because salt passage
 does not depend on pressure but water flux does, <strong>higher pressure gives purer water</strong>
 locally. Both permeances rise with temperature by a factor
 \(\text{TCF} = \exp[K(1/298 - 1/T)]\), with \(K = 2640\) K above 25 °C and 3020 K below
@@ -338,7 +340,7 @@ A film model with mass-transfer coefficient \(k\) gives</p>
 <p>The ratio \(C_m/C_b\) is the <strong>CP factor</strong>. It raises \(\pi_m\), which lowers the flux and
 lets more salt through. FilmTec’s design equations estimate the average polarisation factor of an 8-inch element as
 \(\exp(0.7\,Y_i)\), where \(Y_i\) is the element’s recovery <a class="cite" href="#ref-tcf">[15]</a>; for the default vessel that is
-about 1.06, close to the model’s average of 1.08 along the vessel.</p>
+about 1.06, close to the model’s average of 1.11 along the vessel.</p>
 <p><strong>How the model solves it.</strong> For a given \(J_w\) the three equations above give \(C_p\)
 and \(C_m\) in closed form:</p>
 <div class="eq">\[ C_p = \frac{B\,E\,C_b}{J_w + B\,E},\qquad C_m = C_p + (C_b - C_p)\,E,\qquad E = e^{J_w/k} \]</div>
@@ -376,7 +378,7 @@ carries almost as much salt as the feed. Because some salt leaves with the perme
 is slightly less concentrated than for an ideal membrane, so recovery can edge just past
 \(r_{\max}\), which is defined for an ideal membrane.</li>
 <li>At the vessel level, <strong>rejection is not always improved by more pressure</strong>.
-At the default 9 m³/h feed it peaks near 70 bar: beyond that, extra recovery concentrates the
+At the default 12 m³/h feed it peaks near 75 bar: beyond that, extra recovery concentrates the
 brine so much that the permeate made near the outlet is saltier. (The original plan expected
 rejection to rise steadily; the tests found otherwise.)</li>
 </ul>
@@ -528,7 +530,7 @@ that it can be checked:</p>
 from the decisions log:</p>
 <ul>
 <li>The plan expected observed rejection to rise steadily with feed pressure. The vessel model
-showed a maximum near 70 bar (§3.5); the explanation was kept as a teaching point.</li>
+showed a maximum at high pressure (near 75 bar for the default settings) (§3.5); the explanation was kept as a teaching point.</li>
 <li>The plan’s root-finder tolerance (10⁻¹² m/s) was too loose to show the 4th-order convergence of
 the Runge–Kutta method; it was tightened to 10⁻¹⁶ m/s.</li>
 <li>A test of the recovery limit with 1000× the membrane area failed because the pinch happened
@@ -567,13 +569,13 @@ within millimetres, which the grid could not resolve. With 10× the area, the mo
 <li id="ref-sorek">WaterWorld. Largest SWRO desalination plant in the world operational in Israel (Sorek). <a href="https://www.waterworld.com/home/article/16207862/largest-swro-desalination-plant-in-the-world-operational-in-israel">waterworld.com</a></li>
 <li id="ref-carlsbad">San Diego County Water Authority. Seawater desalination: Claude “Bud” Lewis Carlsbad Desalination Plant. <a href="https://www.sdcwa.org/?p=950">sdcwa.org</a></li>
 <li id="ref-elimelech">Elimelech, M. &amp; Phillip, W. A. (2011). The future of seawater desalination: energy, technology, and the environment. <em>Science</em>, 333(6043), 712–717. <a href="https://doi.org/10.1126/science.1200488">doi:10.1126/science.1200488</a></li>
-<li id="ref-erd">Review of isobaric energy recovery devices (95–97 % efficiency): Frontiers in Sustainable Cities (2020), mini review. <a href="https://doi.org/10.3389/frsc.2020.00009">doi:10.3389/frsc.2020.00009</a> <span class="todo">TODO-VERIFY authors</span></li>
+<li id="ref-erd">Schunke, A. J., Hernandez Herrera, G. A., Padhye, L. &amp; Berry, T.-A. (2020). Energy recovery in SWRO desalination: current status and new possibilities. <em>Frontiers in Sustainable Cities</em>, 2, 9. <a href="https://doi.org/10.3389/frsc.2020.00009">doi:10.3389/frsc.2020.00009</a></li>
 <li id="ref-element">DuPont Water Solutions (2019). FilmTec™ SW30HRLE-440 Element, Product Data Sheet, Form No. 45-D00969-en, Rev. 3: 440 ft² (41 m²) active area, 40 in length, 1,200 psig (83 bar) maximum operating pressure. <a href="https://www.lenntech.com/data-sheets/DuPont-FilmTec-SW30HRLE-440-L.pdf">lenntech.com (PDF)</a>; <a href="https://www.dupont.com/products/filmtecsw30hrle440.html">dupont.com</a></li>
 <li id="ref-toray">WaterWorld. Toray wins membrane order for largest seawater desalination plant. <a href="https://www.waterworld.com/drinking-water-treatment/press-release/14276387/toray-wins-membrane-order-for-largest-seawater-desalination-plant">waterworld.com</a></li>
 <li id="ref-hydranautics">Hydranautics (Nitto). RO system data normalization, technical service bulletin. <a href="https://www.lenntech.com/data-sheets/Hydranautics-normaliz-L.pdf">lenntech.com (PDF)</a></li>
 <li id="ref-lgchem">LG Chem Water Solutions. Technical service bulletin. <a href="https://lgwatersolutions.com/wp-content/uploads/2025/01/LG-Chem-TSB_ENG_Public_111.pdf">lgwatersolutions.com (PDF)</a></li>
 <li id="ref-pitzer">Pitzer, K. S. &amp; Mayorga, G. (1973). Thermodynamics of electrolytes. II. Activity and osmotic coefficients for strong electrolytes with one or both ions univalent. <em>Journal of Physical Chemistry</em>, 77(19), 2300–2308. <a href="https://doi.org/10.1021/j100638a009">doi:10.1021/j100638a009</a></li>
-<li id="ref-werber">Werber, J. R., Osuji, C. O. &amp; Elimelech, M. (2016). Materials for next-generation desalination and water purification membranes. <em>Nature Reviews Materials</em>, 1, 16018. <a href="https://doi.org/10.1038/natrevmats.2016.18">doi:10.1038/natrevmats.2016.18</a></li>
+<li id="ref-werber">Werber, J. R., Osuji, C. O. &amp; Elimelech, M. (2016). Materials for next-generation desalination and water purification membranes. <em>Nature Reviews Materials</em>, 1, 16018. <a href="https://doi.org/10.1038/natrevmats.2016.18">doi:10.1038/natrevmats.2016.18</a> <span class="todo">TODO-VERIFY</span></li>
 <li id="ref-tcf">Dow FILMTEC Membranes. Tech Manual Excerpt: System Design: System Performance Projection, “Design Equations and Parameters” (Tables 3.9–3.11), Form No. 609-02057-604. <a href="https://www.lenntech.com/data-sheets/filmtec-design-equations-l.pdf">lenntech.com (PDF)</a></li>
 <li id="ref-millero">Millero, F. J., Feistel, R., Wright, D. G. &amp; McDougall, T. J. (2008). The composition of Standard Seawater and the definition of the Reference-Composition Salinity Scale. <em>Deep-Sea Research I</em>, 55(1), 50–72. <a href="https://doi.org/10.1016/j.dsr.2007.10.001">doi:10.1016/j.dsr.2007.10.001</a></li>
 <li id="ref-ghaffour">Ghaffour, N., Missimer, T. M. &amp; Amy, G. L. (2013). Technical review and evaluation of the economics of water desalination: current and future challenges for better water supply sustainability. <em>Desalination</em>, 309, 197–207. <a href="https://doi.org/10.1016/j.desal.2012.10.015">doi:10.1016/j.desal.2012.10.015</a></li>

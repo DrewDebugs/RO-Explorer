@@ -123,7 +123,7 @@ def v_balance(fast):
 @check("V10", "RK4 grid convergence: observed order ≈ 4", "Vessel model")
 def v_order(fast):
     ref = m.simulate_vessel(BASE, N=1024, fixed_N=True).recovery
-    errs = [abs(m.simulate_vessel(BASE, N=n, fixed_N=True).recovery - ref) for n in (2, 4, 8)]
+    errs = [abs(m.simulate_vessel(BASE, N=n, fixed_N=True).recovery - ref) for n in (4, 8, 16)]
     orders = [math.log2(errs[i] / errs[i + 1]) for i in range(2)]
     return _result(all(3.5 < p < 4.5 for p in orders), "3.5 – 4.5",
                    ", ".join(f"{p:.2f}" for p in orders), orders=orders)

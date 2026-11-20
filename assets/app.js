@@ -26,11 +26,11 @@ const VESSEL_CONTROLS = [
   { head: "Feed" },
   { id: "C_f", label: "Feed salinity", unit: "g/L NaCl", min: 0.5, max: 70, step: 0.5, value: 35 },
   { id: "P_f", label: "Feed pressure", unit: "bar", min: 5, max: 85, step: 0.5, value: 60 },
-  { id: "Q_f", label: "Feed flow per vessel", unit: "m³/h", min: 2, max: 16, step: 0.1, value: 9 },
+  { id: "Q_f", label: "Feed flow per vessel", unit: "m³/h", min: 2, max: 16, step: 0.1, value: 12 },
   { id: "T", label: "Temperature", unit: "°C", min: 5, max: 40, step: 0.5, value: 25 },
   { head: "Membrane (at 25 °C)" },
-  { id: "A", label: "Water permeance A", unit: "LMH/bar", min: 0.3, max: 10, step: 0.05, value: 1.0 },
-  { id: "B", label: "Salt permeance B", unit: "LMH", min: 0, max: 1, step: 0.01, value: 0.1 },
+  { id: "A", label: "Water permeance A", unit: "LMH/bar", min: 0.3, max: 10, step: 0.05, value: 1.4 },
+  { id: "B", label: "Salt permeance B", unit: "LMH", min: 0, max: 1, step: 0.005, value: 0.05 },
   { id: "k", label: "Mass-transfer coeff. k", unit: "LMH", min: 20, max: 2000, step: 5, value: 180 },
   { id: "n_elements", label: "Elements per vessel", unit: "× 40.9 m²", min: 1, max: 8, step: 1, value: 7 },
   { id: "dP_drop", label: "Pressure drop", unit: "bar / vessel", min: 0, max: 5, step: 0.1, value: 1.5 },
@@ -61,7 +61,7 @@ const ECON_CONTROLS = [
 ];
 
 const PRESETS = {
-  seawater: { C_f: 35, P_f: 60, Q_f: 9, T: 25, A: 1.0, B: 0.1, k: 180, n_elements: 7, dP_drop: 1.5,
+  seawater: { C_f: 35, P_f: 60, Q_f: 12, T: 25, A: 1.4, B: 0.05, k: 180, n_elements: 7, dP_drop: 1.5,
               pressure_drop_on: true },
   brackish: { C_f: 3, P_f: 15, Q_f: 12, T: 25, A: 3.0, B: 0.2, k: 180, n_elements: 7, dP_drop: 1.5,
               pressure_drop_on: true },
