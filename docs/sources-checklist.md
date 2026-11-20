@@ -17,7 +17,7 @@ Columns: **Where** = file/section that uses it. **Verified?** = filled in by the
 | S4 | Pitzer NaCl parameters, 25 °C | β⁰ = 0.0765, β¹ = 0.2664, C^φ = 0.00127 | Pitzer, K. S. & Mayorga, G. (1973). *J. Phys. Chem.* 77(19), 2300–2308. doi:10.1021/j100638a009 | `ro_model.PITZER_*` | Verified by the student against Pitzer & Mayorga (1973) | ☑ |
 | S5 | Debye–Hückel A_φ, 25 °C; b = 1.2; α = 2.0 | 0.392; 1.2; 2.0 kg^½ mol^-½ | Pitzer (1973) / Pitzer & Mayorga (1973) | `ro_model.PITZER_APHI`, `PITZER_B`, `PITZER_ALPHA` | Verified by the student against Pitzer & Mayorga (1973) | ☑ |
 | S6 | NaCl osmotic coefficients, 25 °C (test reference) | φ = 0.932 (0.1 m), 0.921 (0.5), 0.936 (1.0), 0.983 (2.0), 1.045 (3.0) | Robinson, R. A. & Stokes, R. H. (1959). *Electrolyte Solutions*, 2nd ed., Appendix 8.10 | `tests/test_properties.py` | Verified by the student against the tabulated NaCl data | ☑ |
-| S7 | TCF constants for A and B | 2640 K (T ≥ 25 °C), 3020 K (T < 25 °C) | Membrane manufacturer design manual (FilmTec/DuPont Water Solutions technical manual, temperature correction factor) | `ro_model.TCF_K_ABOVE/BELOW` | **TODO-VERIFY** (exact constants, and whether B uses the same factor) | ☐ |
+| S7 | TCF constants for A and B | 2640 K (T ≥ 25 °C), 3020 K (T < 25 °C) | Membrane manufacturer design manual (FilmTec/DuPont Water Solutions technical manual, temperature correction factor) | `ro_model.TCF_K_ABOVE/BELOW` | Verified by the student (same as S11, FilmTec design equations Eq. 16a,b) | ☑ |
 | S8 | Minimum energy, 35 g/L at 50 % recovery | 1.06 kWh/m³ | Elimelech, M. & Phillip, W. A. (2011). The future of seawater desalination: energy, technology, and the environment. *Science* 333(6043), 712–717. doi:10.1126/science.1200488 | `tests/test_properties.py::test_sec_min_seawater_50pct` | Verified by the student against Elimelech & Phillip (2011) | ☑ |
 
 ### Model results that depend on these (computed, for cross-checking)
@@ -50,7 +50,7 @@ Columns: **Where** = file/section that uses it. **Verified?** = filled in by the
 
 | # | Quantity | Value used | Source / reasoning | Status | Verified? |
 |---|---|---|---|---|---|
-| S21 | Electricity price | $0.08/kWh | EIA Electric Power Monthly Table 5.6.A (U.S. total, industrial). **TODO-VERIFY**: eia.gov was not reachable from the build environment; student to read the current value | **To confirm**: open the link and check the value | ☐ |
+| S21 | Electricity price | $0.096/kWh (was $0.08) | EIA Electric Power Monthly Table 5.6.A, U.S. Total row: industrial 9.64 ¢/kWh (latest month), 8.98 ¢/kWh a year earlier | Verified by the student (screenshot of the EIA table); default updated to match | ☑ |
 | S22 | Membrane element | $1,000 per element | Retail listing (Servapure): ~$1,040–1,150 per SW30HRLE-440, MSRP $1,538. Bulk plant prices are likely lower. Found by Claude; student to confirm | **To confirm**: open the link and check the value | ☐ |
 | S23 | Pressure vessel | $2,700 per vessel | Xylem list price $2,730 for a Codeline 8″ fiberglass seawater vessel (1000 psi). Found by Claude; student to confirm | **To confirm**: open the link and check the value | ☐ |
 | S24 | HP pump + ERD | $400 per kW | Calibrated so HP pumps + ERD = 2.6 % of total CAPEX (Danfoss breakdown: HPP 1.22 %, ERD 1.4 %). Vendor source; student to confirm | **To confirm**: open the Danfoss / Caldera sources and check the shares | ☐ |

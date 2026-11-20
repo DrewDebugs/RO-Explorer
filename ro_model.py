@@ -693,7 +693,7 @@ class EconomicsInputs:
 
     capacity: float = 100_000.0  # m^3/d design permeate capacity
     availability: float = 0.95  # fraction of the year the plant produces
-    electricity_price: float = 0.08  # $/kWh
+    electricity_price: float = 0.096  # $/kWh (EIA Table 5.6.A, U.S. industrial average, S21)
     membrane_cost: float = 1000.0  # $ per 8-inch element (retail listing, S22)
     vessel_cost: float = 2700.0  # $ per pressure vessel (list price, S23)
     pump_erd_cost: float = 400.0  # $ per kW of HP pump + ERD (calibrated: 2.6 % of CAPEX, S24)
@@ -776,7 +776,7 @@ UI_DEFAULTS = {
     # economics
     "capacity": 100_000.0,
     "availability": 0.95,
-    "electricity_price": 0.08,
+    "electricity_price": 0.096,
     "membrane_cost": 1000.0,
     "vessel_cost": 2700.0,
     "pump_erd_cost": 400.0,

@@ -48,7 +48,7 @@ const ECON_CONTROLS = [
   { id: "capacity", label: "Plant capacity", unit: "m³/day", min: 1000, max: 1000000, step: 1000, value: 100000 },
   { id: "availability", label: "Availability", unit: "%", min: 50, max: 100, step: 1, value: 95, scale: 0.01 },
   { head: "Prices" },
-  { id: "electricity_price", label: "Electricity", unit: "$/kWh", min: 0.02, max: 0.3, step: 0.005, value: 0.08 },
+  { id: "electricity_price", label: "Electricity", unit: "$/kWh", min: 0.02, max: 0.3, step: 0.001, value: 0.096 },
   { id: "membrane_cost", label: "Membrane element", unit: "$ each", min: 200, max: 2000, step: 10, value: 1000 },
   { id: "vessel_cost", label: "Pressure vessel", unit: "$ each", min: 500, max: 5000, step: 50, value: 2700 },
   { id: "pump_erd_cost", label: "HP pump + ERD", unit: "$/kW", min: 100, max: 3000, step: 50, value: 400 },
