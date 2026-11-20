@@ -1,0 +1,9 @@
+# Development / CI dependencies (CPython only).
+# numpy is pinned to the version bundled with the Pyodide release used in the
+# browser (Pyodide 314.0.7 -> Python 3.14, numpy 2.4.6), so the tests run the
+# model against the same numpy the page runs.
+numpy==2.4.6
+# SciPy is used only by the independent reference implementation in tests/.
+scipy==1.18.0
+pytest==9.2.0
+pytest-cov==7.1.0
