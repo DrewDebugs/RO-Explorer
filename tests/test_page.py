@@ -99,3 +99,9 @@ def test_pinned_versions_agree():
 def test_external_scripts_are_pinned():
     for src in re.findall(r'<script[^>]+src="(https://[^"]+)"', HTML):
         assert re.search(r"@\d+\.\d+\.\d+|/v\d+\.\d+\.\d+/", src), src
+
+
+def test_citation_numbers_match_reference_order():
+    order = re.findall(r'<li id="(ref-[\w-]+)"', HTML)
+    for ref, num in re.findall(r'class="cite" href="#(ref-[\w-]+)">\[(\d+)\]', HTML):
+        assert order.index(ref) + 1 == int(num), f"{ref} is cited as [{num}] but is item {order.index(ref) + 1}"

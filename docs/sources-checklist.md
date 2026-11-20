@@ -77,3 +77,14 @@ Columns: **Where** = file/section that uses it. **Verified?** = filled in by the
 | S40 | Element size | 8 in × 40 in, 440 ft² | DuPont FilmTec SW30 | See S9 | ☐ |
 | S41 | Membrane suppliers | DuPont (FilmTec), Toray (Taweelah order), Nitto/Hydranautics, LG Chem | Company documents and WaterWorld (Toray Taweelah order) | Presence confirmed; no market-share claims made | ☐ |
 | S42 | Standard seawater salinity | ~35 g/kg (Reference-Composition Salinity 35.16504 g/kg) | Millero et al. (2008) *Deep-Sea Res. I* 55, 50–72 | **TODO-VERIFY** | ☐ |
+
+## Page §2: industry examples
+
+| # | Fact on page | Value | Source | Status | Verified? |
+|---|---|---|---|---|---|
+| S43 | Taweelah solar share | ~30 % of plant electricity from on-site solar (planned) | pv magazine, 23 June 2022 (quoting ACWA Power) | **TODO-VERIFY**: sources quote the solar park as 41 MW or 69 MW, and 30 % by year 8 rising to 55 %; only the 30 % is shown | ☐ |
+| S44 | Sorek membrane arrangement | 16-inch elements in vertical vessels; ~4.3× the flow of an 8-inch element | WaterWorld, “Sorek stands tall” (IDE figures) | Company-reported | ☐ |
+| S45 | Orange County GWRS capacity | 130 million US gal/day (492,000 m³/day), largest indirect potable reuse plant; final expansion 2023 | Orange County Water District; CA State Water Board press release 14 Apr 2023 | Confirmed (operator) | ☐ |
+| S46 | NEWater process and share | MF/UF → RO → UV; up to 40 % of Singapore’s demand | US EPA summary of Singapore’s reuse regulation; PUB “Our Water Story” | Confirmed | ☐ |
+| S47 | Perth (Kwinana) wind offset | 80 MW Emu Downs wind farm, 48 turbines | Government of Western Australia media statement, 26 July 2005 | Confirmed (other sources say 83 MW) | ☐ |
+| S48 | Semiconductor ultrapure water | RO then ion exchange/EDI; a 200 mm fab at 20,000 wafers/month uses up to 3,000 m³/day of UPW | MKS Instruments | **TODO-VERIFY** (vendor page; figures vary widely between fabs) | ☐ |
