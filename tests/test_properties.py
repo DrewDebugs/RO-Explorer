@@ -57,7 +57,7 @@ def test_pitzer_seawater():
     assert m.pa_to_bar(m.osmotic_pressure_pitzer(C_SEA)) == pytest.approx(27.4, abs=0.05)
 
 
-# TODO-VERIFY: NaCl osmotic coefficients at 25 degC, Robinson & Stokes,
+# NaCl osmotic coefficients at 25 degC (verified by the student, S6), Robinson & Stokes,
 # "Electrolyte Solutions" (2nd ed., 1959), Appendix 8.10. Listed in
 # docs/sources-checklist.md.
 ROBINSON_STOKES_PHI = {0.1: 0.932, 0.5: 0.921, 1.0: 0.936, 2.0: 0.983, 3.0: 1.045}

@@ -229,7 +229,7 @@ this page simulates <em>one</em> of those vessels and then scales up by counting
 <h3>Energy: the number that decides everything</h3>
 <p>Separating fresh water from 35 g/L seawater at 50 % recovery needs at least about
 <strong>1.06 kWh per m³</strong> of fresh water, a limit set by thermodynamics, not by technology
-<a class="cite" href="#ref-elimelech">[7]</a> <span class="todo">TODO-VERIFY</span>. Real plants use
+<a class="cite" href="#ref-elimelech">[7]</a>. Real plants use
 more, partly because a real stage must push harder than the minimum (see the
 <a href="#theory-pinch">pinch</a> in §3). Most of the pressure energy in the brine is recovered with
 isobaric <strong>pressure exchangers</strong>, which transfer about <strong>95–97 %</strong> of it to
@@ -307,12 +307,11 @@ higher pressure, the <strong>osmotic pressure</strong> \(\pi\). Reverse osmosis 
 <p>with \(i = 2\) ions per NaCl, \(C\) the salt concentration in g/L (= kg/m³) and \(M = 58.44\)
 g/mol. For 35 g/L at 25 °C this gives <strong>29.7 bar</strong>. Real salt solutions are not ideal; the
 <strong>osmotic coefficient</strong> \(\varphi\) corrects this, \(\pi = \varphi\,\pi_{\text{van’t Hoff}}\). We use the
-<strong>Pitzer</strong> model for NaCl at 25 °C <a class="cite" href="#ref-pitzer">[13]</a>
-<span class="todo">TODO-VERIFY</span>:</p>
+<strong>Pitzer</strong> model for NaCl at 25 °C <a class="cite" href="#ref-pitzer">[13]</a>:</p>
 <div class="eq">\[ \varphi - 1 = -A_\varphi\frac{\sqrt{m}}{1 + 1.2\sqrt{m}} + m\left(\beta^{(0)} + \beta^{(1)} e^{-2\sqrt{m}}\right) + m^2 C^{\varphi} \]</div>
 <p>with \(m\) the molality, \(A_\varphi = 0.392\), \(\beta^{(0)} = 0.0765\), \(\beta^{(1)} = 0.2664\) and
 \(C^\varphi = 0.00127\). It reproduces tabulated osmotic coefficients of NaCl to within 0.003 from
-0.1 to 3 mol/kg <a class="cite" href="#ref-robinson">[18]</a> <span class="todo">TODO-VERIFY</span> (check V03 in §6). At seawater strength \(\varphi \approx 0.92\), so van’t Hoff overestimates
+0.1 to 3 mol/kg <a class="cite" href="#ref-robinson">[18]</a> (check V03 in §6). At seawater strength \(\varphi \approx 0.92\), so van’t Hoff overestimates
 \(\pi\) by about 8 % (27.4 instead of 29.7 bar). The model uses van’t Hoff by default; the Pitzer
 switch in §4 shows the difference.</p>
 

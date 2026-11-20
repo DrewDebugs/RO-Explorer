@@ -61,7 +61,7 @@ def v_pi_vh(fast):
 
 @check("V03", "Pitzer osmotic coefficient vs tabulated NaCl data, 0.1–3 mol/kg", "Properties")
 def v_pitzer(fast):
-    table = {0.1: 0.932, 0.5: 0.921, 1.0: 0.936, 2.0: 0.983, 3.0: 1.045}  # Robinson & Stokes (TODO-VERIFY)
+    table = {0.1: 0.932, 0.5: 0.921, 1.0: 0.936, 2.0: 0.983, 3.0: 1.045}  # Robinson & Stokes 1949; verified by the student (S6)
     dev = max(abs(float(m.osmotic_coefficient_pitzer(k)) - v) for k, v in table.items())
     return _result(dev < 0.003, "|Δφ| < 0.003", f"max |Δφ| = {dev:.4f}", max_abs_dev=dev)
 
