@@ -52,9 +52,9 @@ PITZER_B = 1.2  # kg^0.5 mol^-0.5, universal Pitzer constant
 PITZER_ALPHA = 2.0  # kg^0.5 mol^-0.5, for 1:1 electrolytes
 
 # Temperature correction factor constants (Arrhenius form) for A and B.
-# TODO-VERIFY: values as given in the membrane manufacturer's design manual
-# (FilmTec form: 2640 K above 25 degC, 3020 K below). Listed in
-# docs/sources-checklist.md for the user to confirm.
+# FilmTec design equations (Dow Form No. 609-02057-604), Eq. 16a,b:
+# 2640 K above 25 degC, 3020 K below. Verified by the student (S11).
+# FilmTec's Eq. 19 applies the same TCF to salt passage, as done here for B.
 TCF_K_ABOVE = 2640.0  # K, used for T >= 25 degC
 TCF_K_BELOW = 3020.0  # K, used for T < 25 degC
 
@@ -184,7 +184,7 @@ def temperature_correction_factor(T):
         TCF = exp[K (1/T_ref - 1/T)],  A(T) = A_25 * TCF,  B(T) = B_25 * TCF
 
     TCF = 1 at 25 degC, > 1 above it, < 1 below it. K switches between
-    TCF_K_ABOVE and TCF_K_BELOW at 25 degC (TODO-VERIFY constants above).
+    TCF_K_ABOVE and TCF_K_BELOW at 25 degC (FilmTec Eq. 16a,b).
     The mass-transfer coefficient k is NOT corrected (documented limitation).
     """
     T = np.asarray(T, dtype=float)
@@ -790,7 +790,7 @@ UI_DEFAULTS = {
 # Thresholds for warnings on the page.
 ELEMENT_MAX_PRESSURE_BAR = 83.0  # FilmTec SW30HRLE-440 datasheet: 1,200 psig (83 bar); verified (S10)
 BRINE_GUIDELINE_GL = 70.0  # TODO-VERIFY: teaching threshold for brine/scaling concern
-CP_GUIDELINE = 1.2  # TODO-VERIFY: design guideline for maximum CP factor
+CP_GUIDELINE = 1.2  # teaching threshold; FilmTec's correlation exp(0.7*Y_i) gives ~1.06 for a typical element
 
 
 def inputs_from_ui(ui):
@@ -876,8 +876,8 @@ def check_warnings(inp: VesselInputs, res: VesselResult | None = None):
                               f"(not modelled)."))
         cp_max = float(np.nanmax(res.cp_factor))
         if cp_max > CP_GUIDELINE:
-            w.append(("info", f"Concentration polarisation factor reaches {cp_max:.2f} (design "
-                              f"guidelines keep it below about {CP_GUIDELINE})."))
+            w.append(("info", f"Concentration polarisation factor reaches {cp_max:.2f}, which is high: "
+                              f"FilmTec's design correlation gives about 1.06 for a typical 8-inch element."))
         if not res.converged:
             w.append(("info", f"Grid convergence check did not reach the tolerance (N = {res.N})."))
     return w

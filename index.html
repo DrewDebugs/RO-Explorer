@@ -312,7 +312,9 @@ g/mol. For 35 g/L at 25 °C this gives <strong>29.7 bar</strong>. Real salt solu
 <p>with \(m\) the molality, \(A_\varphi = 0.392\), \(\beta^{(0)} = 0.0765\), \(\beta^{(1)} = 0.2664\) and
 \(C^\varphi = 0.00127\). It reproduces tabulated osmotic coefficients of NaCl to within 0.003 from
 0.1 to 3 mol/kg <a class="cite" href="#ref-robinson">[18]</a> (check V03 in §6). At seawater strength \(\varphi \approx 0.92\), so van’t Hoff overestimates
-\(\pi\) by about 8 % (27.4 instead of 29.7 bar). The model uses van’t Hoff by default; the Pitzer
+\(\pi\) by about 8 % (27.4 instead of 29.7 bar). As an independent check, FilmTec’s design equation for
+feed osmotic pressure, \(\pi_f = 1.12\,(273 + T)\sum m_j\) psi, corresponds to an osmotic coefficient of about 0.93
+<a class="cite" href="#ref-tcf">[15]</a>, close to the Pitzer value. The model uses van’t Hoff by default; the Pitzer
 switch in §4 shows the difference.</p>
 
 <h3>3.2 The membrane: solution–diffusion</h3>
@@ -326,7 +328,7 @@ membranes trade a low \(A\) for a very low \(B\); brackish membranes are more op
 does not depend on pressure but water flux does, <strong>higher pressure gives purer water</strong>
 locally. Both permeances rise with temperature by a factor
 \(\text{TCF} = \exp[K(1/298 - 1/T)]\), with \(K = 2640\) K above 25 °C and 3020 K below
-<a class="cite" href="#ref-tcf">[15]</a> <span class="todo">TODO-VERIFY</span>.</p>
+<a class="cite" href="#ref-tcf">[15]</a>.</p>
 
 <h3>3.3 Concentration polarisation</h3>
 <p>Water leaves through the membrane but salt is left behind, so salt piles up in a thin boundary
@@ -334,7 +336,9 @@ layer. The concentration at the membrane surface \(C_m\) is higher than in the b
 A film model with mass-transfer coefficient \(k\) gives</p>
 <div class="eq">\[ \frac{C_m - C_p}{C_b - C_p} = \exp\!\left(\frac{J_w}{k}\right) \]</div>
 <p>The ratio \(C_m/C_b\) is the <strong>CP factor</strong>. It raises \(\pi_m\), which lowers the flux and
-lets more salt through. Designers keep it below about 1.2 <span class="todo">TODO-VERIFY</span>.</p>
+lets more salt through. FilmTec’s design equations estimate the average polarisation factor of an 8-inch element as
+\(\exp(0.7\,Y_i)\), where \(Y_i\) is the element’s recovery <a class="cite" href="#ref-tcf">[15]</a>; for the default vessel that is
+about 1.06, close to the model’s average of 1.08 along the vessel.</p>
 <p><strong>How the model solves it.</strong> For a given \(J_w\) the three equations above give \(C_p\)
 and \(C_m\) in closed form:</p>
 <div class="eq">\[ C_p = \frac{B\,E\,C_b}{J_w + B\,E},\qquad C_m = C_p + (C_b - C_p)\,E,\qquad E = e^{J_w/k} \]</div>
@@ -357,7 +361,8 @@ feed that becomes fresh water.</p>
 without polarisation, the brine at recovery \(r\) has \(\pi_b = \pi_f/(1 - r)\). Flux stops when
 \(\pi_b\) reaches the applied pressure, giving the <strong>single-stage recovery limit</strong></p>
 <div class="eq">\[ r_{\max} = 1 - \frac{\pi_f}{\Delta P} \]</div>
-<p>For seawater at 60 bar, \(r_{\max} \approx 50\,\%\). This is the RO version of a <strong>pinch</strong> in
+<p>FilmTec’s design equations use the same expression as the “limiting system recovery”, with the
+polarisation factor and salt rejection included <a class="cite" href="#ref-tcf">[15]</a>. For seawater at 60 bar, \(r_{\max} \approx 50\,\%\). This is the RO version of a <strong>pinch</strong> in
 McCabe–Thiele analysis: there, an operating line that touches the equilibrium curve needs
 infinitely many stages; here, a pressure line that touches the rising brine osmotic-pressure
 curve needs infinite membrane area. Membrane added beyond the pinch produces almost
@@ -569,7 +574,7 @@ within millimetres, which the grid could not resolve. With 10× the area, the mo
 <li id="ref-lgchem">LG Chem Water Solutions. Technical service bulletin. <a href="https://lgwatersolutions.com/wp-content/uploads/2025/01/LG-Chem-TSB_ENG_Public_111.pdf">lgwatersolutions.com (PDF)</a></li>
 <li id="ref-pitzer">Pitzer, K. S. &amp; Mayorga, G. (1973). Thermodynamics of electrolytes. II. Activity and osmotic coefficients for strong electrolytes with one or both ions univalent. <em>Journal of Physical Chemistry</em>, 77(19), 2300–2308. <a href="https://doi.org/10.1021/j100638a009">doi:10.1021/j100638a009</a></li>
 <li id="ref-werber">Werber, J. R., Osuji, C. O. &amp; Elimelech, M. (2016). Materials for next-generation desalination and water purification membranes. <em>Nature Reviews Materials</em>, 1, 16018. <a href="https://doi.org/10.1038/natrevmats.2016.18">doi:10.1038/natrevmats.2016.18</a></li>
-<li id="ref-tcf">FilmTec™ design equations and parameters (temperature correction factor). <a href="https://www.lenntech.com/data-sheets/filmtec-design-equations-l.pdf">lenntech.com (PDF)</a></li>
+<li id="ref-tcf">Dow FILMTEC Membranes. Tech Manual Excerpt: System Design: System Performance Projection, “Design Equations and Parameters” (Tables 3.9–3.11), Form No. 609-02057-604. <a href="https://www.lenntech.com/data-sheets/filmtec-design-equations-l.pdf">lenntech.com (PDF)</a></li>
 <li id="ref-millero">Millero, F. J., Feistel, R., Wright, D. G. &amp; McDougall, T. J. (2008). The composition of Standard Seawater and the definition of the Reference-Composition Salinity Scale. <em>Deep-Sea Research I</em>, 55(1), 50–72. <a href="https://doi.org/10.1016/j.dsr.2007.10.001">doi:10.1016/j.dsr.2007.10.001</a></li>
 <li id="ref-ghaffour">Ghaffour, N., Missimer, T. M. &amp; Amy, G. L. (2013). Technical review and evaluation of the economics of water desalination: current and future challenges for better water supply sustainability. <em>Desalination</em>, 309, 197–207. <a href="https://doi.org/10.1016/j.desal.2012.10.015">doi:10.1016/j.desal.2012.10.015</a></li>
 <li id="ref-robinson">Robinson, R. A. &amp; Stokes, R. H. (1949). Tables of osmotic and activity coefficients of electrolytes in aqueous solution at 25 °C. <em>Transactions of the Faraday Society</em>, 45, 612–624. <a href="https://doi.org/10.1039/TF9494500612">doi:10.1039/TF9494500612</a> (used in the validation tests)</li>
