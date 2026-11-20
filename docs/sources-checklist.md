@@ -57,7 +57,7 @@ Columns: **Where** = file/section that uses it. **Verified?** = filled in by the
 | S25 | Other-plant multiplier | 7 | Chosen so total CAPEX ≈ $1,080 per m³/day, within the range implied by real plants (Sorek ≈ $880, Carlsbad ≈ $5,300 per m³/day from reported totals) and the learning-curve average (Caldera & Breyer 2017, *Water Resour. Res.*, projects ~$1,340–1,580 per m³/day by 2030) | **TODO-VERIFY** Caldera & Breyer reference and plant cost totals | ☐ |
 | S26 | Fixed O&M | 2 % of CAPEX per year | Illustrative | **TODO-VERIFY** | ☐ |
 | S27 | Interest / plant life / membrane life | 8 % / 25 yr / 5 yr | Engineering-economics assumptions (stated) | Assumption | ☐ |
-| S28 | Reported water cost of large SWRO | $0.50–1.00/m³ | Ghaffour, Missimer & Amy (2013) *Desalination* 309, 197–207 (“below US$0.50/m³ … in other locations 50 % higher (US$1.00/m³)”) | **TODO-VERIFY** wording and DOI 10.1016/j.desal.2012.10.015 | ☐ |
+| S28 | Reported water cost of large SWRO | $0.50–1.00/m³ | Ghaffour, Missimer & Amy (2013) *Desalination* 309, 197–207 (“below US$0.50/m³ … in other locations 50 % higher (US$1.00/m³)”) | Verified by the student against the paper’s abstract (“below US$0.50/m³ … 50% higher (US$1.00/m³)”) | ☑ |
 
 ## Page §2: industrial significance
 
@@ -82,9 +82,9 @@ Columns: **Where** = file/section that uses it. **Verified?** = filled in by the
 
 | # | Fact on page | Value | Source | Status | Verified? |
 |---|---|---|---|---|---|
-| S43 | Taweelah solar share | ~30 % of plant electricity from on-site solar (planned) | pv magazine, 23 June 2022 (quoting ACWA Power) | **TODO-VERIFY**: sources quote the solar park as 41 MW or 69 MW, and 30 % by year 8 rising to 55 %; only the 30 % is shown | ☐ |
+| S43 | Taweelah solar share | ≥ 30 % of electricity from a ~69 MW solar park within eight years; target 55 % | pv magazine, 23 June 2022 (quoting ACWA Power) | Verified by the student against pv magazine (quoting ACWA): at least 30 % within eight years, target 55 %; solar park ≈ 69 MW per ACWA. Page wording updated to match | ☑ |
 | S44 | Sorek membrane arrangement | 16-inch elements in vertical vessels; ~4.3× the flow of an 8-inch element | WaterWorld, “Sorek stands tall” (IDE figures) | Company-reported | ☐ |
 | S45 | Orange County GWRS capacity | 130 million US gal/day (492,000 m³/day), largest indirect potable reuse plant; final expansion 2023 | Orange County Water District; CA State Water Board press release 14 Apr 2023 | Confirmed (operator) | ☐ |
 | S46 | NEWater process and share | MF/UF → RO → UV; up to 40 % of Singapore’s demand | US EPA summary of Singapore’s reuse regulation; PUB “Our Water Story” | Confirmed | ☐ |
 | S47 | Perth (Kwinana) wind offset | 80 MW Emu Downs wind farm, 48 turbines | Government of Western Australia media statement, 26 July 2005 | Confirmed (other sources say 83 MW) | ☐ |
-| S48 | Semiconductor ultrapure water | RO then ion exchange/EDI; a 200 mm fab at 20,000 wafers/month uses up to 3,000 m³/day of UPW | MKS Instruments | **TODO-VERIFY** (vendor page; figures vary widely between fabs) | ☐ |
+| S48 | Semiconductor ultrapure water | RO then ion exchange/EDI; a 200 mm fab at 20,000 wafers/month uses up to 3,000 m³/day of UPW | MKS Instruments | Verified by the student against the MKS page (based on ITRS 2011: 7 L/cm² per wafer out). MKS says UPW is made with RO followed by deionising resin beds; page wording updated to match | ☑ |
