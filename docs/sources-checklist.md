@@ -67,7 +67,7 @@ Columns: **Where** = file/section that uses it. **Verified?** = filled in by the
 | S30 | Global desalinated water production | ~95 million m³/day | Jones et al. (2019) | Confirmed in abstract | ☐ |
 | S31 | Share produced in Middle East & North Africa | 48 % | Jones et al. (2019) | Confirmed in abstract | ☐ |
 | S32 | Global brine production | ~142 million m³/day | Jones et al. (2019) | Confirmed in abstract | ☐ |
-| S33 | Membrane (RO) share of global capacity | ~69 % | UN Third World Ocean Assessment, Ch. 8 (“approximately 69% of global desalination capacity”) | **TODO-VERIFY** (other sources give 65–77 % depending on year and metric; the plan expected this from Jones 2019, which could not be confirmed) | ☐ |
+| S33 | Membrane (RO) share of global capacity | ~69 % | UN Third World Ocean Assessment, Ch. 8: “Membrane desalination technology (involving reverse osmosis) accounts for approximately 85% of total worldwide desalination plants and generates approximately 69% of global desalination capacity” (the chapter cites its own refs 26 and 31) | Verified by the student against the WOA chapter text. Not found in the Jones 2019 abstract, so cited to the WOA | ☑ |
 | S34 | Taweelah capacity | 909,200 m³/day (200 MIGD) | ACWA Power project page; EWEC announcements | Confirmed (operator) | ☐ |
 | S35 | Sorek 2 capacity | ≈ 670,000 m³/day (IDE project page says 672,000) | IDE press release, 18 March 2025 | Confirmed (operator) | ☐ |
 | S36 | Sorek capacity | 624,000 m³/day, opened 2013 | IDE / WaterWorld | Confirmed | ☐ |
