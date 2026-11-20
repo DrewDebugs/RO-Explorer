@@ -27,7 +27,7 @@ runs in your browser through [Pyodide](https://pyodide.org/) (WebAssembly), with
 | M7 | Page content and sources | ✅ done |
 | M8 | Interactive app (Pyodide + Plotly) | ✅ done |
 | M9 | Validation section with in-browser re-run | ✅ done |
-| M10 | AI log and presentation sections, deploy | ✅ done |
+| M10 | AI log and presentation sections, deploy | ✅ built; deploy waits for Pages to be enabled (Settings → Pages → Source: GitHub Actions) |
 
 Full plan: [`docs/ai-log/01-plan.md`](docs/ai-log/01-plan.md). Every number and its source:
 [`docs/sources-checklist.md`](docs/sources-checklist.md). Changes made since the plan
