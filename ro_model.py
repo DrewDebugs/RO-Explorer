@@ -788,7 +788,7 @@ UI_DEFAULTS = {
 }
 
 # Thresholds for warnings on the page.
-ELEMENT_MAX_PRESSURE_BAR = 83.0  # TODO-VERIFY: typical SWRO element datasheet limit
+ELEMENT_MAX_PRESSURE_BAR = 83.0  # FilmTec SW30HRLE-440 datasheet: 1,200 psig (83 bar); verified (S10)
 BRINE_GUIDELINE_GL = 70.0  # TODO-VERIFY: teaching threshold for brine/scaling concern
 CP_GUIDELINE = 1.2  # TODO-VERIFY: design guideline for maximum CP factor
 
