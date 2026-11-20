@@ -50,13 +50,13 @@ Columns: **Where** = file/section that uses it. **Verified?** = filled in by the
 
 | # | Quantity | Value used | Source / reasoning | Status | Verified? |
 |---|---|---|---|---|---|
-| S21 | Electricity price | $0.08/kWh | Illustrative industrial price | **TODO-VERIFY** (EIA/IEA industrial average) | ☐ |
-| S22 | Membrane element | $600 each | Illustrative | **TODO-VERIFY** (Voutchkov 2018 or vendor quotes) | ☐ |
-| S23 | Pressure vessel | $1,500 each | Illustrative | **TODO-VERIFY** | ☐ |
-| S24 | HP pump + ERD | $1,000 per kW | Illustrative | **TODO-VERIFY** | ☐ |
-| S25 | Other-plant multiplier | 7 | Chosen so total CAPEX ≈ $1,080 per m³/day, within the range implied by real plants (Sorek ≈ $880, Carlsbad ≈ $5,300 per m³/day from reported totals) and the learning-curve average (Caldera & Breyer 2017, *Water Resour. Res.*, projects ~$1,340–1,580 per m³/day by 2030) | **TODO-VERIFY** Caldera & Breyer reference and plant cost totals | ☐ |
-| S26 | Fixed O&M | 2 % of CAPEX per year | Illustrative | **TODO-VERIFY** | ☐ |
-| S27 | Interest / plant life / membrane life | 8 % / 25 yr / 5 yr | Engineering-economics assumptions (stated) | Assumption | ☐ |
+| S21 | Electricity price | $0.08/kWh | EIA Electric Power Monthly Table 5.6.A (U.S. total, industrial). **TODO-VERIFY**: eia.gov was not reachable from the build environment; student to read the current value | **To confirm**: open the link and check the value | ☐ |
+| S22 | Membrane element | $1,000 per element | Retail listing (Servapure): ~$1,040–1,150 per SW30HRLE-440, MSRP $1,538. Bulk plant prices are likely lower. Found by Claude; student to confirm | **To confirm**: open the link and check the value | ☐ |
+| S23 | Pressure vessel | $2,700 per vessel | Xylem list price $2,730 for a Codeline 8″ fiberglass seawater vessel (1000 psi). Found by Claude; student to confirm | **To confirm**: open the link and check the value | ☐ |
+| S24 | HP pump + ERD | $400 per kW | Calibrated so HP pumps + ERD = 2.6 % of total CAPEX (Danfoss breakdown: HPP 1.22 %, ERD 1.4 %). Vendor source; student to confirm | **To confirm**: open the Danfoss / Caldera sources and check the shares | ☐ |
+| S25 | Other-plant multiplier | 12.5 | Calibrated so membranes = 3.9 % of CAPEX (Danfoss). Gives $1,439 per m³/d, inside Caldera & Breyer (2017)’s 2030 projection of $1,340–1,580 per m³/d (Water Resour. Res. 53, 10523; doi:10.1002/2017WR021402). Student to confirm both | **To confirm**: open the Danfoss / Caldera sources and check the shares | ☐ |
+| S26 | Fixed O&M | 4.5 % of CAPEX per year | Calibrated so electricity = 45 % of OPEX (Danfoss: “at least 45%”). Student to confirm | **To confirm**: open the Danfoss / Caldera sources and check the shares | ☐ |
+| S27 | Interest / plant life / membrane life | 8 % / 25 yr / 5 yr | Engineering-economics assumptions, stated as such on the page (8 %, 25 yr, 5 yr) | Assumption (stated) | ☑ |
 | S28 | Reported water cost of large SWRO | $0.50–1.00/m³ | Ghaffour, Missimer & Amy (2013) *Desalination* 309, 197–207 (“below US$0.50/m³ … in other locations 50 % higher (US$1.00/m³)”) | Verified by the student against the paper’s abstract (“below US$0.50/m³ … 50% higher (US$1.00/m³)”) | ☑ |
 
 ## Page §2: industrial significance

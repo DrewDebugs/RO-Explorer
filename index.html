@@ -467,8 +467,14 @@ membranes, pressure vessels and high-pressure pumps with energy recovery, multip
 annualised with the capital recovery factor</p>
 <div class="eq">\[ \text{CRF} = \frac{i\,(1+i)^n}{(1+i)^n - 1} \]</div>
 <p>and added to electricity (SEC × price), membrane replacement and fixed operation and maintenance.
-<strong>This is a teaching model, not a cost estimate.</strong> The default unit costs are
-illustrative <span class="todo">TODO-VERIFY</span>; change them to see what drives the price.
+<strong>This is a teaching model, not a cost estimate.</strong> The defaults are anchored to published
+figures: an industrial electricity price of $0.08/kWh <a class="cite" href="#ref-eia">[25]</a> <span class="todo">TODO-VERIFY</span>, a retail price of
+about $1,000 per seawater element <a class="cite" href="#ref-elementprice">[26]</a> and a list price of about $2,700 per 8-inch pressure vessel
+<a class="cite" href="#ref-vesselprice">[27]</a>. The pump cost per kW, the other-plant multiplier and the O&amp;M fraction are calibrated so that
+membranes make up about 3.9 % and high-pressure pumps plus energy recovery about 2.6 % of total capital cost, and
+electricity about 45 % of operating cost, as in an industry cost breakdown <a class="cite" href="#ref-danfoss">[28]</a>. The resulting capital cost,
+about $1,440 per m³/day of capacity, is in line with a learning-curve study of 4,237 SWRO plants, which projects
+a global average of $1,340–1,580 per m³/day by 2030 <a class="cite" href="#ref-caldera">[29]</a>. Change any input to see what drives the price.
 For comparison, large SWRO plants are reported to produce water for roughly
 <strong>$0.50–1.00 per m³</strong>, depending on site, energy price and financing
 <a class="cite" href="#ref-ghaffour">[17]</a>. The SEC here counts only the RO pumps, not intake,
@@ -586,6 +592,11 @@ within millimetres, which the grid could not resolve. With 10× the area, the mo
 <li id="ref-newater">US EPA. Summary of Singapore’s water reuse guideline or regulation for potable water reuse. <a href="https://epa.gov/waterreuse/summary-singapores-water-reuse-guideline-or-regulation-potable-water-reuse">epa.gov</a>; PUB Singapore, <a href="https://pub.gov.sg/-/media/PUB/Public/Key-Initiatives/Our-Water-SG60/Resources/Exhibition-Panels/Exhibition-Panels---Our-Water-Story.pdf">Our Water Story (PDF)</a>.</li>
 <li id="ref-perth">Government of Western Australia (26 July 2005). Wind farm chosen to power Perth’s desalination plant (media statement). <a href="https://www.wa.gov.au/government/media-statements/Gallop%20Labor%20Government/Wind-farm-chosen-to-power-Perth%27s-desalination-plant-20050726">wa.gov.au</a></li>
 <li id="ref-upw">MKS Instruments. Ultrapure water for semiconductor manufacturing. <a href="https://www.mks.com/n/semiconductor-ultrapure-water">mks.com</a> (usage figure based on the ITRS 2011 roadmap, 7 L of UPW per cm² of wafer)</li>
+<li id="ref-eia">U.S. Energy Information Administration. Electric Power Monthly, Table 5.6.A: Average price of electricity to ultimate customers by end-use sector (industrial). <a href="https://www.eia.gov/electricity/monthly/epm_table_grapher.php?t=epmt_5_6_a">eia.gov</a></li>
+<li id="ref-elementprice">Servapure. DuPont FilmTec Sea Water Element SW30HRLE-440 (retail listing; about $1,040–1,150 per element, MSRP $1,538). <a href="https://www.servapure.com/Dupont-Filmtec-Sea-Water-Element-SW30HRLE-440-8000-GPD_p_7106.html">servapure.com</a></li>
+<li id="ref-vesselprice">Xylem. 8″ seawater pressure vessels (Codeline 8″ fiberglass vessel, list price $2,730). <a href="https://www.xylem.com/en-us/catalog/parts--consumables/ecommerce/pressure-vessels/seawater-vessels/8-seawater-vessels/">xylem.com</a></li>
+<li id="ref-danfoss">Danfoss. Understanding the cost drivers of SWRO (CAPEX and OPEX breakdown; pump-manufacturer source). <a href="https://www.danfoss.com/en/service-and-support/articles/hpp/understanding-the-cost-drivers-of-swro/">danfoss.com</a></li>
+<li id="ref-caldera">Caldera, U. &amp; Breyer, C. (2017). Learning curve for seawater reverse osmosis desalination plants: capital cost trend of the past, present, and future. <em>Water Resources Research</em>, 53, 10523–10538. <a href="https://doi.org/10.1002/2017WR021402">doi:10.1002/2017WR021402</a></li>
 </ol>
 
 <h3>Software</h3>

@@ -49,15 +49,15 @@ const ECON_CONTROLS = [
   { id: "availability", label: "Availability", unit: "%", min: 50, max: 100, step: 1, value: 95, scale: 0.01 },
   { head: "Prices" },
   { id: "electricity_price", label: "Electricity", unit: "$/kWh", min: 0.02, max: 0.3, step: 0.005, value: 0.08 },
-  { id: "membrane_cost", label: "Membrane element", unit: "$ each", min: 200, max: 1500, step: 10, value: 600 },
-  { id: "vessel_cost", label: "Pressure vessel", unit: "$ each", min: 500, max: 5000, step: 50, value: 1500 },
-  { id: "pump_erd_cost", label: "HP pump + ERD", unit: "$/kW", min: 200, max: 3000, step: 50, value: 1000 },
-  { id: "other_multiplier", label: "Other-plant multiplier", unit: "×", min: 1, max: 15, step: 0.1, value: 7 },
+  { id: "membrane_cost", label: "Membrane element", unit: "$ each", min: 200, max: 2000, step: 10, value: 1000 },
+  { id: "vessel_cost", label: "Pressure vessel", unit: "$ each", min: 500, max: 5000, step: 50, value: 2700 },
+  { id: "pump_erd_cost", label: "HP pump + ERD", unit: "$/kW", min: 100, max: 3000, step: 50, value: 400 },
+  { id: "other_multiplier", label: "Other-plant multiplier", unit: "×", min: 1, max: 20, step: 0.1, value: 12.5 },
   { head: "Finance & O&M" },
   { id: "interest", label: "Interest rate", unit: "%/yr", min: 0, max: 15, step: 0.25, value: 8 },
   { id: "plant_life", label: "Plant life", unit: "yr", min: 5, max: 40, step: 1, value: 25 },
   { id: "membrane_life", label: "Membrane life", unit: "yr", min: 2, max: 10, step: 0.5, value: 5 },
-  { id: "om_fraction", label: "Fixed O&M", unit: "% of CAPEX/yr", min: 0, max: 6, step: 0.1, value: 2 },
+  { id: "om_fraction", label: "Fixed O&M", unit: "% of CAPEX/yr", min: 0, max: 8, step: 0.1, value: 4.5 },
 ];
 
 const PRESETS = {

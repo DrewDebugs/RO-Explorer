@@ -694,14 +694,14 @@ class EconomicsInputs:
     capacity: float = 100_000.0  # m^3/d design permeate capacity
     availability: float = 0.95  # fraction of the year the plant produces
     electricity_price: float = 0.08  # $/kWh
-    membrane_cost: float = 600.0  # $ per 8-inch element
-    vessel_cost: float = 1500.0  # $ per pressure vessel
-    pump_erd_cost: float = 1000.0  # $ per kW of installed HP pump + ERD power
-    other_multiplier: float = 7.0  # total plant CAPEX / RO-train equipment CAPEX
+    membrane_cost: float = 1000.0  # $ per 8-inch element (retail listing, S22)
+    vessel_cost: float = 2700.0  # $ per pressure vessel (list price, S23)
+    pump_erd_cost: float = 400.0  # $ per kW of HP pump + ERD (calibrated: 2.6 % of CAPEX, S24)
+    other_multiplier: float = 12.5  # total plant CAPEX / RO-train equipment CAPEX (calibrated: membranes 3.9 % of CAPEX, S25)
     interest: float = 0.08  # 1/yr
     plant_life: float = 25.0  # yr
     membrane_life: float = 5.0  # yr
-    om_fraction: float = 0.02  # fixed O&M per year, fraction of total CAPEX
+    om_fraction: float = 0.045  # fixed O&M per year, fraction of CAPEX (calibrated: energy 45 % of OPEX, S26)
 
 
 def capital_recovery_factor(i, n):
@@ -777,14 +777,14 @@ UI_DEFAULTS = {
     "capacity": 100_000.0,
     "availability": 0.95,
     "electricity_price": 0.08,
-    "membrane_cost": 600.0,
-    "vessel_cost": 1500.0,
-    "pump_erd_cost": 1000.0,
-    "other_multiplier": 7.0,
+    "membrane_cost": 1000.0,
+    "vessel_cost": 2700.0,
+    "pump_erd_cost": 400.0,
+    "other_multiplier": 12.5,
     "interest": 8.0,  # %
     "plant_life": 25.0,
     "membrane_life": 5.0,
-    "om_fraction": 2.0,  # % of CAPEX per year
+    "om_fraction": 4.5,  # % of CAPEX per year
 }
 
 # Thresholds for warnings on the page.
