@@ -22,8 +22,8 @@ runs in your browser through [Pyodide](https://pyodide.org/) (WebAssembly), with
 | M2 | Local solution–diffusion + film-model solver | ✅ done |
 | M3 | 1D RK4 vessel model, convergence check, pinch detection | ✅ done |
 | M4 | Energy (SEC, ERD) and economics | ✅ done |
-| M5 | Independent SciPy reference implementation | ⏳ |
-| M6 | Validation results file for the page | ⏳ |
+| M5 | Independent SciPy reference implementation | ✅ done |
+| M6 | Validation results file for the page | ✅ done |
 | M7 | Page content and sources | ⏳ |
 | M8 | Interactive app (Pyodide + Plotly) | ⏳ |
 | M9 | Validation section with in-browser re-run | ⏳ |
