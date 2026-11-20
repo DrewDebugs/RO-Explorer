@@ -18,7 +18,7 @@ runs in your browser through [Pyodide](https://pyodide.org/) (WebAssembly), with
 | Milestone | What | State |
 |---|---|---|
 | M0 | Repo setup, plan, README, CI skeleton | ✅ done |
-| M1 | Properties: units, osmotic pressure (van’t Hoff + Pitzer), TCF, SEC_min | ⏳ |
+| M1 | Properties: units, osmotic pressure (van’t Hoff + Pitzer), TCF, SEC_min | ✅ done |
 | M2 | Local solution–diffusion + film-model solver | ⏳ |
 | M3 | 1D RK4 vessel model, convergence check, pinch detection | ⏳ |
 | M4 | Energy (SEC, ERD) and economics | ⏳ |
@@ -29,7 +29,8 @@ runs in your browser through [Pyodide](https://pyodide.org/) (WebAssembly), with
 | M9 | Validation section with in-browser re-run | ⏳ |
 | M10 | AI log and presentation sections, deploy | ⏳ |
 
-Full plan: [`docs/ai-log/01-plan.md`](docs/ai-log/01-plan.md). Changes made since the plan
+Full plan: [`docs/ai-log/01-plan.md`](docs/ai-log/01-plan.md). Every number and its source:
+[`docs/sources-checklist.md`](docs/sources-checklist.md). Changes made since the plan
 was approved: [`docs/ai-log/03-decisions.md`](docs/ai-log/03-decisions.md).
 
 ## Repository layout (planned)

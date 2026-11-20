@@ -1,6 +1,7 @@
-"""M0 smoke test: the CI pipeline runs, and the toolchain matches the browser.
+"""Toolchain guard: CI must run the same Python and numpy as the browser (Pyodide).
 
-This file is replaced by real model tests from milestone M1 onward.
+If the Pyodide pin in assets/app.js changes, update these values and
+requirements-dev.txt together.
 """
 
 import sys
