@@ -365,7 +365,7 @@ function renderEconomics() {
   ];
   const lay = baseLayout("", "$ per m³", { barmode: "stack", hovermode: "closest", margin: { l: 56, r: 16, t: 24, b: 96 } });
   lay.shapes = [{ type: "rect", xref: "paper", x0: 0, x1: 1, y0: 0.5, y1: 1.0, fillcolor: hexA(t.c[4], 0.12), line: { width: 0 }, layer: "below" }];
-  lay.annotations = [{ xref: "paper", x: 1, y: 1.0, text: "reported range for large SWRO [17]", showarrow: false,
+  lay.annotations = [{ xref: "paper", x: 1, y: 1.0, text: "reported range for large SWRO [15]", showarrow: false,
                        xanchor: "right", yanchor: "bottom", font: { size: 10, color: t.muted } }];
   Plotly.react("plot-cost", parts.map(([n, v, c]) => ({
     type: "bar", x: ["This plant"], y: [v], name: n, marker: { color: c },

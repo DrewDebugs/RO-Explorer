@@ -75,8 +75,8 @@ Columns: **Where** = file/section that uses it. **Verified?** = filled in by the
 | S38 | Carlsbad energy recovery | 144 pressure exchangers; −46 % RO energy; ~146 million kWh/yr saved | San Diego County Water Authority (an earlier 2013 estimate was 116 million kWh/yr) | Verified by the student (SDCWA) | ☑ |
 | S39 | Minimum energy, 35 g/L, 50 % recovery | 1.06 kWh/m³ | Elimelech & Phillip (2011) *Science* 333, 712 | Verified by the student (same as S8) | ☑ |
 | S40 | Element size | 8 in × 40 in, 440 ft² | DuPont FilmTec SW30HRLE-440 Product Data Sheet, Form No. 45-D00969-en, Rev. 3 (Nov 2019) | Verified by the student (see S9) | ☑ |
-| S41 | Membrane suppliers | DuPont (FilmTec), Toray (Taweelah order), Nitto/Hydranautics, LG Chem | Company documents and WaterWorld (Toray Taweelah order) | Presence confirmed; no market-share claims made | ☐ |
-| S42 | Standard seawater salinity | ~35 g/kg (Reference-Composition Salinity 35.16504 g/kg) | Millero et al. (2008) *Deep-Sea Res. I* 55, 50–72 | **TODO-VERIFY** | ☐ |
+| S41 | Membrane suppliers | DuPont (FilmTec), Toray (Taweelah order), Nitto/Hydranautics | Company documents and WaterWorld (Toray Taweelah order) | Verified by the student for DuPont, Toray and Hydranautics. LG Chem’s source page would not open, so LG Chem was removed from the page | ☑ |
+| S42 | Standard seawater salinity | ~35 g/kg (Reference-Composition Salinity 35.16504 g/kg) | Millero et al. (2008) *Deep-Sea Res. I* 55, 50–72 | Verified by the student (Millero et al. 2008) | ☑ |
 
 ## Page §2: industry examples
 

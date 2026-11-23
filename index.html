@@ -162,8 +162,10 @@ independent SciPy implementation, a closed-form solution and the second law (see
 <a href="#validation">§6</a>).</li>
 <li><strong>Human-verified:</strong> the cited numbers, using the checklist in
 <a href="https://github.com/DrewDebugs/RO-Explorer/blob/main/docs/sources-checklist.md"><code>docs/sources-checklist.md</code></a>.
-Numbers that have not been confirmed against their source yet carry a
-<span class="todo">TODO-VERIFY</span> badge.</li>
+All 48 entries have been checked by the student against the original sources (datasheets,
+papers, operator pages and screenshots); values that are engineering assumptions rather than facts
+are labelled as such. Where a source disagreed with the AI's first draft, the page and the model
+were corrected (see the decisions log in <a href="#ailog">§7</a>).</li>
 </ul>
 The whole AI process (plan, critique, decisions, prompts) is in <a href="#ailog">§7</a>.
 </div>
@@ -219,13 +221,13 @@ this page simulates <em>one</em> of those vessels and then scales up by counting
 
 <h3>Industry examples</h3>
 <p>Seven real installations, each showing a different side of reverse osmosis (every figure is cited; operator figures are as reported by the operator).</p>
-<div class="examples"><article class="example energy"><div class="ex-head"><div class="ex-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#f4c48a" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg></div><div><h4 class="ex-title">Taweelah IWP</h4><div class="ex-place">Abu Dhabi, UAE</div></div><span class="ex-tag">Seawater</span></div><ul><li>The world’s largest operating RO plant, 909,200 m³/day <a class="cite" href="#ref-taweelah">[3]</a>.</li><li>Partly solar-powered: a solar park of about 69 MW is expected to cover at least 30 % of the plant’s electricity within eight years, with a target of 55 % <a class="cite" href="#ref-pvmag">[19]</a>.</li></ul><p class="ex-link"><strong>In the model:</strong> electricity is the largest running cost; change the price in §5 to see how much cheap solar power matters.</p></article>
-<article class="example "><div class="ex-head"><div class="ex-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#b9f3f8" stroke-width="1.8"><rect x="4" y="3" width="4" height="18" rx="2"/><rect x="10" y="3" width="4" height="18" rx="2"/><rect x="16" y="3" width="4" height="18" rx="2"/></svg></div><div><h4 class="ex-title">Sorek</h4><div class="ex-place">Israel</div></div><span class="ex-tag">Seawater</span></div><ul><li>624,000 m³/day, opened 2013 <a class="cite" href="#ref-sorek">[5]</a>.</li><li>Uses 16-inch elements in <em>vertical</em> pressure vessels instead of the usual horizontal 8-inch ones; each larger element passes about 4.3 times the water at the same pressure <a class="cite" href="#ref-soreksize">[20]</a>.</li></ul><p class="ex-link"><strong>In the model:</strong> a vessel of 8-inch elements <a class="cite" href="#ref-element">[9]</a> is modelled; area per vessel sets how many vessels the plant needs.</p></article>
+<div class="examples"><article class="example energy"><div class="ex-head"><div class="ex-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#f4c48a" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg></div><div><h4 class="ex-title">Taweelah IWP</h4><div class="ex-place">Abu Dhabi, UAE</div></div><span class="ex-tag">Seawater</span></div><ul><li>The world’s largest operating RO plant, 909,200 m³/day <a class="cite" href="#ref-taweelah">[3]</a>.</li><li>Partly solar-powered: a solar park of about 69 MW is expected to cover at least 30 % of the plant’s electricity within eight years, with a target of 55 % <a class="cite" href="#ref-pvmag">[17]</a>.</li></ul><p class="ex-link"><strong>In the model:</strong> electricity is the largest running cost; change the price in §5 to see how much cheap solar power matters.</p></article>
+<article class="example "><div class="ex-head"><div class="ex-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#b9f3f8" stroke-width="1.8"><rect x="4" y="3" width="4" height="18" rx="2"/><rect x="10" y="3" width="4" height="18" rx="2"/><rect x="16" y="3" width="4" height="18" rx="2"/></svg></div><div><h4 class="ex-title">Sorek</h4><div class="ex-place">Israel</div></div><span class="ex-tag">Seawater</span></div><ul><li>624,000 m³/day, opened 2013 <a class="cite" href="#ref-sorek">[5]</a>.</li><li>Uses 16-inch elements in <em>vertical</em> pressure vessels instead of the usual horizontal 8-inch ones; each larger element passes about 4.3 times the water at the same pressure <a class="cite" href="#ref-soreksize">[18]</a>.</li></ul><p class="ex-link"><strong>In the model:</strong> a vessel of 8-inch elements <a class="cite" href="#ref-element">[9]</a> is modelled; area per vessel sets how many vessels the plant needs.</p></article>
 <article class="example energy"><div class="ex-head"><div class="ex-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#b9f3f8" stroke-width="1.8" stroke-linecap="round"><path d="M4 16a8 8 0 1 1 16 0"/><path d="M12 16l4.5-5"/><circle cx="12" cy="16" r="1.4" fill="#b9f3f8"/></svg></div><div><h4 class="ex-title">Carlsbad</h4><div class="ex-place">California, USA</div></div><span class="ex-tag">Seawater</span></div><ul><li>About 189,000 m³/day (50 million US gallons) <a class="cite" href="#ref-carlsbad">[6]</a>.</li><li>144 pressure exchangers cut the energy of the RO process by 46 % <a class="cite" href="#ref-carlsbad">[6]</a>.</li></ul><p class="ex-link"><strong>In the model:</strong> switch the energy recovery device off in §4 and watch the specific energy jump.</p></article>
-<article class="example reuse"><div class="ex-head"><div class="ex-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#b9f3f8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c-3 4.5-5 7.4-5 10a5 5 0 0 0 10 0c0-2.6-2-5.5-5-10z"/><path d="M9.5 13.5a2.5 2.5 0 0 0 2.5 2.5"/></svg></div><div><h4 class="ex-title">Groundwater Replenishment System</h4><div class="ex-place">Orange County, California, USA</div></div><span class="ex-tag">Potable reuse</span></div><ul><li>The world’s largest water-purification plant for indirect potable reuse: up to 130 million US gallons (492,000 m³) a day <a class="cite" href="#ref-gwrs">[21]</a>.</li><li>Treated wastewater is purified with reverse osmosis, then used to refill the groundwater basin <a class="cite" href="#ref-gwrs">[21]</a>.</li></ul><p class="ex-link"><strong>In the model:</strong> wastewater is far less salty than seawater; try a low feed salinity to see the much lower pressure needed.</p></article>
-<article class="example reuse"><div class="ex-head"><div class="ex-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#b9f3f8" stroke-width="1.8" stroke-linejoin="round"><path d="M3 21V10l5-3v14M8 21V4l6 3v14M14 21v-9l7 3v6M2 21h20"/></svg></div><div><h4 class="ex-title">NEWater</h4><div class="ex-place">Singapore</div></div><span class="ex-tag">Potable reuse</span></div><ul><li>Microfiltration or ultrafiltration, then reverse osmosis, then UV disinfection <a class="cite" href="#ref-newater">[22]</a>.</li><li>Supplies up to 40 % of Singapore’s water demand <a class="cite" href="#ref-newater">[22]</a>.</li></ul><p class="ex-link"><strong>In the model:</strong> the brackish preset is closer to reuse water than to seawater.</p></article>
-<article class="example energy"><div class="ex-head"><div class="ex-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#b9f3f8" stroke-width="1.8" stroke-linecap="round"><path d="M12 11v11M9 22h6"/><path d="M12 11L12 2.5c2 1.5 2 4.5 0 8.5zM12 11l7.4 4.3c-2.3.9-5 .1-7.4-4.3zM12 11l-7.4 4.3c.3-2.5 2.5-4.4 7.4-4.3z"/></svg></div><div><h4 class="ex-title">Perth Seawater Desalination Plant</h4><div class="ex-place">Kwinana, Western Australia</div></div><span class="ex-tag">Seawater</span></div><ul><li>Its electricity is offset by the 80 MW Emu Downs wind farm (48 turbines), built for the plant <a class="cite" href="#ref-perth">[23]</a>.</li></ul><p class="ex-link"><strong>In the model:</strong> RO needs only electricity, so it pairs naturally with wind and solar power.</p></article>
-<article class="example industrial"><div class="ex-head"><div class="ex-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#d0bfff" stroke-width="1.8"><rect x="6" y="6" width="12" height="12" rx="2"/><rect x="9.5" y="9.5" width="5" height="5"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></svg></div><div><h4 class="ex-title">Semiconductor fabs</h4><div class="ex-place">worldwide</div></div><span class="ex-tag">Ultrapure water</span></div><ul><li>Chip making rinses and cleans wafers with ultrapure water, which is normally produced with reverse osmosis followed by deionising (ion-exchange) resin beds <a class="cite" href="#ref-upw">[24]</a>.</li><li>A typical 200 mm fab processing 20,000 wafers a month can use up to 3,000 m³ of ultrapure water a day, about the daily water need of 20,000 people <a class="cite" href="#ref-upw">[24]</a>.</li></ul><p class="ex-link"><strong>In the model:</strong> permeate salinity (§4) matters here; fabs usually run two RO passes in series to go lower still.</p></article></div>
+<article class="example reuse"><div class="ex-head"><div class="ex-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#b9f3f8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c-3 4.5-5 7.4-5 10a5 5 0 0 0 10 0c0-2.6-2-5.5-5-10z"/><path d="M9.5 13.5a2.5 2.5 0 0 0 2.5 2.5"/></svg></div><div><h4 class="ex-title">Groundwater Replenishment System</h4><div class="ex-place">Orange County, California, USA</div></div><span class="ex-tag">Potable reuse</span></div><ul><li>The world’s largest water-purification plant for indirect potable reuse: up to 130 million US gallons (492,000 m³) a day <a class="cite" href="#ref-gwrs">[19]</a>.</li><li>Treated wastewater is purified with reverse osmosis, then used to refill the groundwater basin <a class="cite" href="#ref-gwrs">[19]</a>.</li></ul><p class="ex-link"><strong>In the model:</strong> wastewater is far less salty than seawater; try a low feed salinity to see the much lower pressure needed.</p></article>
+<article class="example reuse"><div class="ex-head"><div class="ex-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#b9f3f8" stroke-width="1.8" stroke-linejoin="round"><path d="M3 21V10l5-3v14M8 21V4l6 3v14M14 21v-9l7 3v6M2 21h20"/></svg></div><div><h4 class="ex-title">NEWater</h4><div class="ex-place">Singapore</div></div><span class="ex-tag">Potable reuse</span></div><ul><li>Microfiltration or ultrafiltration, then reverse osmosis, then UV disinfection <a class="cite" href="#ref-newater">[20]</a>.</li><li>Supplies up to 40 % of Singapore’s water demand <a class="cite" href="#ref-newater">[20]</a>.</li></ul><p class="ex-link"><strong>In the model:</strong> the brackish preset is closer to reuse water than to seawater.</p></article>
+<article class="example energy"><div class="ex-head"><div class="ex-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#b9f3f8" stroke-width="1.8" stroke-linecap="round"><path d="M12 11v11M9 22h6"/><path d="M12 11L12 2.5c2 1.5 2 4.5 0 8.5zM12 11l7.4 4.3c-2.3.9-5 .1-7.4-4.3zM12 11l-7.4 4.3c.3-2.5 2.5-4.4 7.4-4.3z"/></svg></div><div><h4 class="ex-title">Perth Seawater Desalination Plant</h4><div class="ex-place">Kwinana, Western Australia</div></div><span class="ex-tag">Seawater</span></div><ul><li>Its electricity is offset by the 80 MW Emu Downs wind farm (48 turbines), built for the plant <a class="cite" href="#ref-perth">[21]</a>.</li></ul><p class="ex-link"><strong>In the model:</strong> RO needs only electricity, so it pairs naturally with wind and solar power.</p></article>
+<article class="example industrial"><div class="ex-head"><div class="ex-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#d0bfff" stroke-width="1.8"><rect x="6" y="6" width="12" height="12" rx="2"/><rect x="9.5" y="9.5" width="5" height="5"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></svg></div><div><h4 class="ex-title">Semiconductor fabs</h4><div class="ex-place">worldwide</div></div><span class="ex-tag">Ultrapure water</span></div><ul><li>Chip making rinses and cleans wafers with ultrapure water, which is normally produced with reverse osmosis followed by deionising (ion-exchange) resin beds <a class="cite" href="#ref-upw">[22]</a>.</li><li>A typical 200 mm fab processing 20,000 wafers a month can use up to 3,000 m³ of ultrapure water a day, about the daily water need of 20,000 people <a class="cite" href="#ref-upw">[22]</a>.</li></ul><p class="ex-link"><strong>In the model:</strong> permeate salinity (§4) matters here; fabs usually run two RO passes in series to go lower still.</p></article></div>
 <h3>Energy: the number that decides everything</h3>
 <p>Separating fresh water from 35 g/L seawater at 50 % recovery needs at least about
 <strong>1.06 kWh per m³</strong> of fresh water, a limit set by thermodynamics, not by technology
@@ -242,12 +244,11 @@ the RO process by <strong>46 %</strong>, saving an estimated <strong>146 million
 <strong>spiral-wound elements</strong>, typically 8 inches across and 40 inches long with about
 440 ft² (40.9 m²) of membrane <a class="cite" href="#ref-element">[9]</a>. Major suppliers include DuPont
 (FilmTec) <a class="cite" href="#ref-element">[9]</a>, Toray, which supplied the Taweelah membranes
-<a class="cite" href="#ref-toray">[10]</a>, Nitto (Hydranautics) <a class="cite" href="#ref-hydranautics">[11]</a> and
-LG Chem <a class="cite" href="#ref-lgchem">[12]</a>.</p>
+<a class="cite" href="#ref-toray">[10]</a>, and Nitto (Hydranautics) <a class="cite" href="#ref-hydranautics">[11]</a>.</p>
 
 <h3>Where RO is used</h3>
 <ul>
-<li><strong>Seawater desalination (SWRO)</strong>: about 35 g/L feed <a class="cite" href="#ref-millero">[16]</a>, high pressure (the default case here).</li>
+<li><strong>Seawater desalination (SWRO)</strong>: about 35 g/L feed <a class="cite" href="#ref-millero">[14]</a>, high pressure (the default case here).</li>
 <li><strong>Brackish water (BWRO)</strong>: groundwater or estuaries with a few g/L of salt; much lower
 pressure and higher recovery (try the <em>Brackish</em> preset).</li>
 <li><strong>Potable reuse</strong>: purifying treated wastewater to drinking-water quality.</li>
@@ -307,14 +308,14 @@ higher pressure, the <strong>osmotic pressure</strong> \(\pi\). Reverse osmosis 
 <p>with \(i = 2\) ions per NaCl, \(C\) the salt concentration in g/L (= kg/m³) and \(M = 58.44\)
 g/mol. For 35 g/L at 25 °C this gives <strong>29.7 bar</strong>. Real salt solutions are not ideal; the
 <strong>osmotic coefficient</strong> \(\varphi\) corrects this, \(\pi = \varphi\,\pi_{\text{van’t Hoff}}\). We use the
-<strong>Pitzer</strong> model for NaCl at 25 °C <a class="cite" href="#ref-pitzer">[13]</a>:</p>
+<strong>Pitzer</strong> model for NaCl at 25 °C <a class="cite" href="#ref-pitzer">[12]</a>:</p>
 <div class="eq">\[ \varphi - 1 = -A_\varphi\frac{\sqrt{m}}{1 + 1.2\sqrt{m}} + m\left(\beta^{(0)} + \beta^{(1)} e^{-2\sqrt{m}}\right) + m^2 C^{\varphi} \]</div>
 <p>with \(m\) the molality, \(A_\varphi = 0.392\), \(\beta^{(0)} = 0.0765\), \(\beta^{(1)} = 0.2664\) and
 \(C^\varphi = 0.00127\). It reproduces tabulated osmotic coefficients of NaCl to within 0.003 from
-0.1 to 3 mol/kg <a class="cite" href="#ref-robinson">[18]</a> (check V03 in §6). At seawater strength \(\varphi \approx 0.92\), so van’t Hoff overestimates
+0.1 to 3 mol/kg <a class="cite" href="#ref-robinson">[16]</a> (check V03 in §6). At seawater strength \(\varphi \approx 0.92\), so van’t Hoff overestimates
 \(\pi\) by about 8 % (27.4 instead of 29.7 bar). As an independent check, FilmTec’s design equation for
 feed osmotic pressure, \(\pi_f = 1.12\,(273 + T)\sum m_j\) psi, corresponds to an osmotic coefficient of about 0.93
-<a class="cite" href="#ref-tcf">[15]</a>, close to the Pitzer value. The model uses van’t Hoff by default; the Pitzer
+<a class="cite" href="#ref-tcf">[13]</a>, close to the Pitzer value. The model uses van’t Hoff by default; the Pitzer
 switch in §4 shows the difference.</p>
 
 <h3>3.2 The membrane: solution–diffusion</h3>
@@ -323,14 +324,13 @@ The water flux \(J_w\) is driven by the <em>net</em> driving pressure (NDP); the
 concentration difference:</p>
 <div class="eq">\[ J_w = A\left[\Delta P - (\pi_m - \pi_p)\right],\qquad J_s = B\,(C_m - C_p),\qquad C_p = \frac{J_s}{J_w} \]</div>
 <p>\(A\) is the water permeance (L m⁻² h⁻¹ bar⁻¹, “LMH/bar”) and \(B\) the salt permeance (LMH). Seawater
-membranes trade a low \(A\) for a very low \(B\); brackish membranes are more open
-<a class="cite" href="#ref-werber">[14]</a>. The seawater defaults here (\(A = 1.4\) LMH/bar, \(B = 0.05\) LMH) are fitted
+membranes trade a low \(A\) for a very low \(B\); brackish membranes are more open. The seawater defaults here (\(A = 1.4\) LMH/bar, \(B = 0.05\) LMH) are fitted
 to the datasheet of a FilmTec SW30HRLE-440 element <a class="cite" href="#ref-element">[9]</a>, and FilmTec’s design equations give
-\(A \approx 3\) LMH/bar for brackish water, the value used in the brackish preset <a class="cite" href="#ref-tcf">[15]</a>. Because salt passage
+\(A \approx 3\) LMH/bar for brackish water, the value used in the brackish preset <a class="cite" href="#ref-tcf">[13]</a>. Because salt passage
 does not depend on pressure but water flux does, <strong>higher pressure gives purer water</strong>
 locally. Both permeances rise with temperature by a factor
 \(\text{TCF} = \exp[K(1/298 - 1/T)]\), with \(K = 2640\) K above 25 °C and 3020 K below
-<a class="cite" href="#ref-tcf">[15]</a>.</p>
+<a class="cite" href="#ref-tcf">[13]</a>.</p>
 
 <h3>3.3 Concentration polarisation</h3>
 <p>Water leaves through the membrane but salt is left behind, so salt piles up in a thin boundary
@@ -339,7 +339,7 @@ A film model with mass-transfer coefficient \(k\) gives</p>
 <div class="eq">\[ \frac{C_m - C_p}{C_b - C_p} = \exp\!\left(\frac{J_w}{k}\right) \]</div>
 <p>The ratio \(C_m/C_b\) is the <strong>CP factor</strong>. It raises \(\pi_m\), which lowers the flux and
 lets more salt through. FilmTec’s design equations estimate the average polarisation factor of an 8-inch element as
-\(\exp(0.7\,Y_i)\), where \(Y_i\) is the element’s recovery <a class="cite" href="#ref-tcf">[15]</a>; for the default vessel that is
+\(\exp(0.7\,Y_i)\), where \(Y_i\) is the element’s recovery <a class="cite" href="#ref-tcf">[13]</a>; for the default vessel that is
 about 1.06, close to the model’s average of 1.11 along the vessel.</p>
 <p><strong>How the model solves it.</strong> For a given \(J_w\) the three equations above give \(C_p\)
 and \(C_m\) in closed form:</p>
@@ -364,7 +364,7 @@ without polarisation, the brine at recovery \(r\) has \(\pi_b = \pi_f/(1 - r)\).
 \(\pi_b\) reaches the applied pressure, giving the <strong>single-stage recovery limit</strong></p>
 <div class="eq">\[ r_{\max} = 1 - \frac{\pi_f}{\Delta P} \]</div>
 <p>FilmTec’s design equations use the same expression as the “limiting system recovery”, with the
-polarisation factor and salt rejection included <a class="cite" href="#ref-tcf">[15]</a>. For seawater at 60 bar, \(r_{\max} \approx 50\,\%\). This is the RO version of a <strong>pinch</strong> in
+polarisation factor and salt rejection included <a class="cite" href="#ref-tcf">[13]</a>. For seawater at 60 bar, \(r_{\max} \approx 50\,\%\). This is the RO version of a <strong>pinch</strong> in
 McCabe–Thiele analysis: there, an operating line that touches the equilibrium curve needs
 infinitely many stages; here, a pressure line that touches the rising brine osmotic-pressure
 curve needs infinite membrane area. Membrane added beyond the pinch produces almost
@@ -404,7 +404,7 @@ cases. A single stage also needs at least the brine osmotic pressure at the outl
 <h3>3.7 What the model leaves out</h3>
 <ul>
 <li>Salt is NaCl only. Real seawater has many ions; its osmotic pressure is close to that of
-35 g/L NaCl but not identical (seawater salinity is about 35 g/kg <a class="cite" href="#ref-millero">[16]</a>).</li>
+35 g/L NaCl but not identical (seawater salinity is about 35 g/kg <a class="cite" href="#ref-millero">[14]</a>).</li>
 <li>\(A\), \(B\) and \(k\) are constant along the vessel. In reality \(k\) falls as the cross-flow slows,
 and membranes compact under pressure.</li>
 <li>The vessel is one 1D channel: spacers, permeate-side pressure and channel geometry are not modelled.
@@ -468,16 +468,16 @@ annualised with the capital recovery factor</p>
 <div class="eq">\[ \text{CRF} = \frac{i\,(1+i)^n}{(1+i)^n - 1} \]</div>
 <p>and added to electricity (SEC × price), membrane replacement and fixed operation and maintenance.
 <strong>This is a teaching model, not a cost estimate.</strong> The defaults are anchored to published
-figures: an electricity price of $0.096/kWh, the current U.S. industrial average <a class="cite" href="#ref-eia">[25]</a>, a retail price of
-about $1,000 per seawater element <a class="cite" href="#ref-elementprice">[26]</a> and a list price of about $2,700 per 8-inch pressure vessel
-<a class="cite" href="#ref-vesselprice">[27]</a>. The pump cost per kW, the other-plant multiplier and the O&amp;M fraction are calibrated so that
+figures: an electricity price of $0.096/kWh, the current U.S. industrial average <a class="cite" href="#ref-eia">[23]</a>, a retail price of
+about $1,000 per seawater element <a class="cite" href="#ref-elementprice">[24]</a> and a list price of about $2,700 per 8-inch pressure vessel
+<a class="cite" href="#ref-vesselprice">[25]</a>. The pump cost per kW, the other-plant multiplier and the O&amp;M fraction are calibrated so that
 membranes make up about 3.9 % and high-pressure pumps plus energy recovery about 2.6 % of total capital cost, and
-electricity about 45 % of operating cost, as in an industry cost breakdown <a class="cite" href="#ref-danfoss">[28]</a>. The resulting capital cost,
+electricity about 45 % of operating cost, as in an industry cost breakdown <a class="cite" href="#ref-danfoss">[26]</a>. The resulting capital cost,
 about $1,440 per m³/day of capacity, is in line with a learning-curve study of 4,237 SWRO plants, which projects
-a global average of $1,340–1,580 per m³/day by 2030 <a class="cite" href="#ref-caldera">[29]</a>. Change any input to see what drives the price.
+a global average of $1,340–1,580 per m³/day by 2030 <a class="cite" href="#ref-caldera">[27]</a>. Change any input to see what drives the price.
 For comparison, large SWRO plants are reported to produce water for roughly
 <strong>$0.50–1.00 per m³</strong>, depending on site, energy price and financing
-<a class="cite" href="#ref-ghaffour">[17]</a>. The SEC here counts only the RO pumps, not intake,
+<a class="cite" href="#ref-ghaffour">[15]</a>. The SEC here counts only the RO pumps, not intake,
 pretreatment or post-treatment, so it underestimates the plant total.</p>
 </div>
 <div class="econ">
@@ -579,9 +579,7 @@ within millimetres, which the grid could not resolve. With 10× the area, the mo
 <li id="ref-element">DuPont Water Solutions (2019). FilmTec™ SW30HRLE-440 Element, Product Data Sheet, Form No. 45-D00969-en, Rev. 3: 440 ft² (41 m²) active area, 40 in length, 1,200 psig (83 bar) maximum operating pressure. <a href="https://www.lenntech.com/data-sheets/DuPont-FilmTec-SW30HRLE-440-L.pdf">lenntech.com (PDF)</a>; <a href="https://www.dupont.com/products/filmtecsw30hrle440.html">dupont.com</a></li>
 <li id="ref-toray">WaterWorld. Toray wins membrane order for largest seawater desalination plant. <a href="https://www.waterworld.com/drinking-water-treatment/press-release/14276387/toray-wins-membrane-order-for-largest-seawater-desalination-plant">waterworld.com</a></li>
 <li id="ref-hydranautics">Hydranautics (Nitto). RO system data normalization, technical service bulletin. <a href="https://www.lenntech.com/data-sheets/Hydranautics-normaliz-L.pdf">lenntech.com (PDF)</a></li>
-<li id="ref-lgchem">LG Chem Water Solutions. Technical service bulletin. <a href="https://lgwatersolutions.com/wp-content/uploads/2025/01/LG-Chem-TSB_ENG_Public_111.pdf">lgwatersolutions.com (PDF)</a></li>
 <li id="ref-pitzer">Pitzer, K. S. &amp; Mayorga, G. (1973). Thermodynamics of electrolytes. II. Activity and osmotic coefficients for strong electrolytes with one or both ions univalent. <em>Journal of Physical Chemistry</em>, 77(19), 2300–2308. <a href="https://doi.org/10.1021/j100638a009">doi:10.1021/j100638a009</a></li>
-<li id="ref-werber">Werber, J. R., Osuji, C. O. &amp; Elimelech, M. (2016). Materials for next-generation desalination and water purification membranes. <em>Nature Reviews Materials</em>, 1, 16018. <a href="https://doi.org/10.1038/natrevmats.2016.18">doi:10.1038/natrevmats.2016.18</a> <span class="todo">TODO-VERIFY</span></li>
 <li id="ref-tcf">Dow FILMTEC Membranes. Tech Manual Excerpt: System Design: System Performance Projection, “Design Equations and Parameters” (Tables 3.9–3.11), Form No. 609-02057-604. <a href="https://www.lenntech.com/data-sheets/filmtec-design-equations-l.pdf">lenntech.com (PDF)</a></li>
 <li id="ref-millero">Millero, F. J., Feistel, R., Wright, D. G. &amp; McDougall, T. J. (2008). The composition of Standard Seawater and the definition of the Reference-Composition Salinity Scale. <em>Deep-Sea Research I</em>, 55(1), 50–72. <a href="https://doi.org/10.1016/j.dsr.2007.10.001">doi:10.1016/j.dsr.2007.10.001</a></li>
 <li id="ref-ghaffour">Ghaffour, N., Missimer, T. M. &amp; Amy, G. L. (2013). Technical review and evaluation of the economics of water desalination: current and future challenges for better water supply sustainability. <em>Desalination</em>, 309, 197–207. <a href="https://doi.org/10.1016/j.desal.2012.10.015">doi:10.1016/j.desal.2012.10.015</a></li>
