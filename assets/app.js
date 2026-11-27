@@ -36,7 +36,7 @@ const VESSEL_CONTROLS = [
   { id: "dP_drop", label: "Pressure drop", unit: "bar / vessel", min: 0, max: 5, step: 0.1, value: 1.5 },
   { head: "Options" },
   { id: "pressure_drop_on", label: "Include pressure drop", toggle: true, value: true },
-  { id: "pitzer", label: "Pitzer correction for π (non-ideal NaCl)", toggle: true, value: false },
+  { id: "pitzer", label: "Pitzer correction for π (NaCl, not full seawater)", toggle: true, value: false },
   { head: "Energy" },
   { id: "erd_on", label: "Energy recovery device (ERD)", toggle: true, value: true },
   { id: "eta_pump", label: "Pump efficiency", unit: "%", min: 50, max: 90, step: 1, value: 80, scale: 0.01 },

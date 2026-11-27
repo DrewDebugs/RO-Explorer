@@ -44,7 +44,25 @@ verbatim as approved) and every accept/reject decision on the second-model criti
 
 ## Critique: accept / reject
 
-*(Filled in after `02-critique.md` is added.)*
+The second-model critique ([`02-critique.md`](02-critique.md), by Muse, saved verbatim) reviewed the plan
+before any code existed. By the time it arrived, the model was built, tested and verified against sources,
+so each point is answered against the **current** code: some were already handled, some led to new changes
+(marked **changed now**), and one was rejected with a measurement.
+
+The critique's own number checks (§1: π = 29.7 bar, SEC_min = 1.14 / 1.06 kWh/m³, r_max = 0.505, unit
+conversions, element area, bracket argument, CRF) all agree with the code and the test suite.
 
 | # | Critique point | Accepted? | Action / reason |
 |---|---|---|---|
+| C1 | §2.1 SEC formula “missing /36” (D1) | **Rejected as a bug; wording clarified** | The model is in SI: P_f/(η_p r) with P in Pa gives J/m³, converted to kWh/m³ by a named, tested helper (`j_per_m3_to_kwh_per_m3`; test `1 bar = 1/36 kWh/m³`). The page states “1 bar on 1 m³ = 1/36 kWh” next to the formula. The plan was ambiguous, not wrong; numbers on the page were never 36× too large (default 2.28 kWh/m³ with ERD, matching the critique's own 2.31 check) |
+| C2 | §2.2 Default operating point too close to the pinch; warning would fire (D2) | **Accepted, already resolved** | After verifying the membrane against the FilmTec datasheet (D29) the default feed is 12 m³/h: recovery 43.7 % = 89 % of r_max, so the > 90 % warning no longer fires by default. The 90 % threshold was kept; a 9 m³/h case still triggers it in the tests |
+| C3 | §2.3 Constant k is a bias near the pinch (D3) | **Accepted — changed now** | Kept k constant (as the critique recommends for now) but quantified the bias: cross-flow falls ~44 % along the default vessel; even with the outlet k (k ∝ Q^0.5–0.8) along the whole vessel, recovery falls only 1.4–2.4 points (43.7 → 41–42 %). The page's limitations now call it a bias, give its direction (overestimates flux/recovery near the outlet) and size |
+| C4 | §2.4 Permeate pressure and pressure drop matter near the pinch | **Accepted — changed now** | Measured: +0.5 bar permeate pressure → −0.5 points recovery; +0.5 bar pressure drop → −0.3 points. Added to the pinch section so its location is not over-read |
+| C5 | §2.5 Economics untestable without $/vessel and $/kW (D4) | **Accepted, already resolved** | Defaults were set at M4 (D16), tested by a hand calculation, and later calibrated to sources and verified by the student (D30, D31) |
+| C6 | §3 Millero: 35 g/kg ≠ 35 g/L | **Accepted — changed now** | The applications list said “about 35 g/L feed [Millero]”. Now: “about 35 g of salt per kg of seawater (roughly 36 g/L, since seawater is denser) … the default uses 35 g/L of NaCl as a stand-in” |
+| C7 | §3 Brackish preset incomplete (only “higher A”) | **Accepted, already resolved** | The preset specifies A = 3.0, B = 0.2 LMH and 12 m³/h (D23); A = 3.0 later matched FilmTec's design equation exactly |
+| C8 | §3 SEC ≥ SEC_min test needs a tolerance (D5) | **Accepted, already done** | The sweep uses a relative tolerance of 10⁻⁹ and a perfect pump/ERD (D20). Smallest ratio found over 479 cases: SEC/SEC_min = 1.18, so the bound is never close |
+| C9 | §3 Slider-drag performance with convergence up to N = 3200 (D6) | **Rejected with measurement** | Measured in the browser (Chromium, Pyodide): a default run including redraw takes ~110 ms (it converges at N = 100, far below 3200), and inputs are debounced by 150 ms. The heavier pressure sweep (~0.5 s) uses a fixed grid and runs only after inputs pause for 600 ms, so it never runs during a drag. No async/on-release change was made |
+| C10 | §3 Label the Pitzer toggle as NaCl, not seawater | **Accepted — changed now** | Toggle label is now “Pitzer correction for π (NaCl, not full seawater)”; the theory section already explains that real seawater is not NaCl |
+| C11 | §3 TCF and ERD efficiency still TODO-VERIFY | **Accepted, already resolved** | Both verified by the student: TCF against FilmTec design equations Eq. 16a,b (S11); ERD 95–97 % against Schunke et al. 2020 (S18) |
+| C12 | §4 Keep: same `ro_model.py` in browser and tests, Illinois + brentq, actual-separation SEC_min, no marimo/Rust | **Agreed** | All kept as planned |

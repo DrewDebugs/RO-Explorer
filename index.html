@@ -248,7 +248,7 @@ the RO process by <strong>46 %</strong>, saving an estimated <strong>146 million
 
 <h3>Where RO is used</h3>
 <ul>
-<li><strong>Seawater desalination (SWRO)</strong>: about 35 g/L feed <a class="cite" href="#ref-millero">[14]</a>, high pressure (the default case here).</li>
+<li><strong>Seawater desalination (SWRO)</strong>: about 35 g of salt per kg of seawater <a class="cite" href="#ref-millero">[14]</a> (roughly 36 g/L, since seawater is denser than fresh water), high pressure. The default case here uses 35 g/L of NaCl as a stand-in.</li>
 <li><strong>Brackish water (BWRO)</strong>: groundwater or estuaries with a few g/L of salt; much lower
 pressure and higher recovery (try the <em>Brackish</em> preset).</li>
 <li><strong>Potable reuse</strong>: purifying treated wastewater to drinking-water quality.</li>
@@ -368,7 +368,9 @@ polarisation factor and salt rejection included <a class="cite" href="#ref-tcf">
 McCabe–Thiele analysis: there, an operating line that touches the equilibrium curve needs
 infinitely many stages; here, a pressure line that touches the rising brine osmotic-pressure
 curve needs infinite membrane area. Membrane added beyond the pinch produces almost
-nothing. Plot 3 in §4 shows the gap between \(P\) and \(\pi\) closing, and plot 6 shows recovery
+nothing. The position of the pinch depends on details the model treats simply: 0.5 bar more
+permeate back-pressure lowers the default recovery by about 0.5 percentage points, and 0.5 bar more pressure drop by
+about 0.3, so the pinch location should not be read more precisely than that. Plot 3 in §4 shows the gap between \(P\) and \(\pi\) closing, and plot 6 shows recovery
 approaching \(r_{\max}\) as pressure changes.</p>
 <p>Two consequences that the model shows:</p>
 <ul>
@@ -405,8 +407,11 @@ cases. A single stage also needs at least the brine osmotic pressure at the outl
 <ul>
 <li>Salt is NaCl only. Real seawater has many ions; its osmotic pressure is close to that of
 35 g/L NaCl but not identical (seawater salinity is about 35 g/kg <a class="cite" href="#ref-millero">[14]</a>).</li>
-<li>\(A\), \(B\) and \(k\) are constant along the vessel. In reality \(k\) falls as the cross-flow slows,
-and membranes compact under pressure.</li>
+<li>\(A\), \(B\) and \(k\) are constant along the vessel, and membrane compaction under pressure is ignored.
+This is a <em>bias</em>, not just a simplification: in reality \(k\) falls as the cross-flow slows (by about 44 % along
+the default vessel), so polarisation is underestimated near the outlet, exactly where the pinch is decided. The model
+therefore slightly <em>overestimates</em> flux and recovery there. Even if the low outlet value of \(k\) applied along
+the whole vessel (a worst case), the default recovery would fall by only 1.4–2.4 percentage points (43.7 % → 41–42 %).</li>
 <li>The vessel is one 1D channel: spacers, permeate-side pressure and channel geometry are not modelled.
 Element datasheets are used only for orders of magnitude.</li>
 <li><strong>Fouling and scaling</strong> are not modelled. In real plants they control the design:
@@ -523,7 +528,7 @@ that it can be checked:</p>
 <thead><tr><th>Step</th><th>Document</th><th>Status</th></tr></thead>
 <tbody>
 <tr><td>1. Plan, written by Claude before any code (kept exactly as approved)</td><td><a href="https://github.com/DrewDebugs/RO-Explorer/blob/main/docs/ai-log/01-plan.md"><code>01-plan.md</code></a></td><td>Done</td></tr>
-<tr><td>2. Critique of the plan by a second AI model</td><td><a href="https://github.com/DrewDebugs/RO-Explorer/blob/main/docs/ai-log/02-critique.md"><code>02-critique.md</code></a></td><td id="critique-status">To be added by the student</td></tr>
+<tr><td>2. Critique of the plan by a second AI model</td><td><a href="https://github.com/DrewDebugs/RO-Explorer/blob/main/docs/ai-log/02-critique.md"><code>02-critique.md</code></a></td><td id="critique-status">Done (second model: Muse); accept/reject in <code>03-decisions.md</code></td></tr>
 <tr><td>3. Decisions: every change from the plan, and accept/reject of the critique</td><td><a href="https://github.com/DrewDebugs/RO-Explorer/blob/main/docs/ai-log/03-decisions.md"><code>03-decisions.md</code></a></td><td>Ongoing</td></tr>
 <tr><td>4. Comparison of two independent implementations</td><td><a href="https://github.com/DrewDebugs/RO-Explorer/blob/main/docs/ai-log/04-implementation-comparison.md"><code>04-implementation-comparison.md</code></a></td><td>Done</td></tr>
 <tr><td>5. Prompts, verbatim</td><td><a href="https://github.com/DrewDebugs/RO-Explorer/tree/main/docs/ai-log/prompts"><code>prompts/</code></a></td><td>To be added by the student</td></tr>
