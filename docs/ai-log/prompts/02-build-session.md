@@ -235,4 +235,30 @@ yes but LG Chem site would not open and S42 is correct and okay to the last todo
 ```text
 Put the prompts on there
 ```
-*AI: wrote this file.*
+*AI: wrote this file (messages 1–34; later messages were added as they came).*
+
+**35.**
+```text
+You can find the planning prompt in the pinned separation process conversation find only the parts about the project and put it on there
+```
+*AI: could not reach that conversation (only this cloud session and an unrelated one were accessible) and asked the student to paste it.*
+
+**36.** *[The student pasted the whole planning conversation from claude.ai: the course's AI-project instructions, the lecture review, the choice of reverse osmosis, and the plan-mode prompt. Its project-related messages are recorded verbatim in [`01-planning-session.md`](01-planning-session.md).]*
+
+*AI: wrote `01-planning-session.md` and flagged that the course requires implementing the plan with at least two different AI models, which had not been done yet; suggested a prompt for the second model.*
+
+## Part 5: the second AI model's implementation
+
+**37.** *[Uploaded files from Muse: `ro_model_COMPARISON_NOTES.md`, `03-decisions-patched.md` and its `ro_model.py` (also uploaded once as an unfinished browser download, `Unconfirmed_12907.crdownload`, which turned out to be the same file). Sent in two parts, after interrupting the AI.]*
+
+*AI: saved the files verbatim, ran both models side by side, found that Muse's model never applies the temperature correction, accepted Muse's molality and wording fixes, and wrote up the comparison (M1–M10).*
+
+**38.** *[The student pasted the conversation with Muse: its critique, its audit of the decisions log and the two messages the student sent it. Recorded in [`03-muse-session.md`](03-muse-session.md).]*
+
+*AI: saved the Muse conversation and answered its three remaining audit points (M11–M13).*
+
+**39.**
+```text
+okay update the prompts with the new prompts as well
+```
+*AI: added messages 35–39 to this file.*
