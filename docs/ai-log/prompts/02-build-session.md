@@ -262,3 +262,9 @@ You can find the planning prompt in the pinned separation process conversation f
 okay update the prompts with the new prompts as well
 ```
 *AI: added messages 35–39 to this file.*
+
+**40.**
+```text
+make sure the website is fully ready besides the video because the website has words on it like awaiting human verification
+```
+*AI: replaced the out-of-date statuses (“Ongoing”, “Awaiting human check”), rewrote the AI statement to name every model and service used, added “Where the student steered” to §7, and updated the attribution.*

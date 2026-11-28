@@ -150,24 +150,29 @@
 <div class="section-head"><div class="drop" aria-hidden="true"><span>1</span></div><div><span class="kicker">Start here</span><h2><span class="visually-hidden">1. </span>Overview</h2></div></div>
 <div class="prose">
 <div class="callout ai">
-<strong>This is an AI project.</strong> The code, the model and the first draft of every text on
-this page were written by <strong>Claude (Anthropic), model Opus 5.5, working in Claude Code</strong>,
-for a Separation Processes course assignment. A human student directed the work, chose
-between options, and checks the sources. What is AI-generated and what is human-verified:
+<strong>This is an AI project</strong> exploring what current AI models can do, made for a Separation
+Processes course assignment. The code, the model and the first draft of every text on this page were
+written by AI; a student directed the work, made the decisions and checked the results.
 <ul>
+<li><strong>AI models and services:</strong> <strong>Claude</strong> (Anthropic) in a claude.ai chat, to
+review the course lectures, choose the topic and write the planning prompt; <strong>Claude Opus 5.5 in
+Claude Code</strong>, in a cloud session linked to the GitHub repository, to plan, build, test and deploy
+the site; and <strong>Muse</strong>, a second AI model, to critique the plan, audit the decisions log and
+write an independent version of the model. <strong>GitHub Actions</strong> runs the tests on every change
+and publishes the site to <strong>GitHub Pages</strong>.</li>
 <li><strong>AI-generated:</strong> the plan, the model (<code>ro_model.py</code>), the tests, the
-independent reference solver, this page and its text.</li>
+reference solvers, this page and its text, and Muse's independent model.</li>
 <li><strong>Checked automatically:</strong> the model against limiting cases with exact answers, an
-independent SciPy implementation, a closed-form solution and the second law (see
-<a href="#validation">§6</a>).</li>
-<li><strong>Human-verified:</strong> the cited numbers, using the checklist in
-<a href="https://github.com/DrewDebugs/RO-Explorer/blob/main/docs/sources-checklist.md"><code>docs/sources-checklist.md</code></a>.
-All 48 entries have been checked by the student against the original sources (datasheets,
-papers, operator pages and screenshots); values that are engineering assumptions rather than facts
-are labelled as such. Where a source disagreed with the AI's first draft, the page and the model
-were corrected (see the decisions log in <a href="#ailog">§7</a>).</li>
+independent SciPy implementation, a closed-form solution, the second law, and the second AI model's
+implementation (see <a href="#validation">§6</a> and <a href="#ailog">§7</a>).</li>
+<li><strong>Human-verified:</strong> all 48 numbers in the
+<a href="https://github.com/DrewDebugs/RO-Explorer/blob/main/docs/sources-checklist.md"><code>sources checklist</code></a>
+were checked by the student against the original sources (datasheets, papers, operator pages);
+engineering assumptions are labelled as such. Where a source disagreed with the AI's first draft, the
+page and the model were corrected.</li>
 </ul>
-The whole AI process (plan, critique, decisions, prompts) is in <a href="#ailog">§7</a>.
+The whole process (plan, critique, decisions, the two AI models' implementations compared, and every
+prompt) is in <a href="#ailog">§7</a>.
 </div>
 
 <p><strong>What you can do here.</strong> Read why reverse osmosis (RO) dominates desalination
@@ -521,21 +526,39 @@ Python file. (Checks V13 and V14 use fewer cases in the browser to keep them qui
 <section id="ailog">
 <div class="section-head"><div class="drop" aria-hidden="true"><span>7</span></div><div><span class="kicker">How it was made</span><h2><span class="visually-hidden">7. </span>AI log</h2></div></div>
 <div class="prose">
-<p>This project was built with an AI coding agent. The process is recorded in the repository so
-that it can be checked:</p>
+<p>This project was built by AI models, directed by a student. Every step is recorded in the
+repository so that it can be checked:</p>
 <div class="table-wrap">
 <table>
 <thead><tr><th>Step</th><th>Document</th><th>Status</th></tr></thead>
 <tbody>
 <tr><td>1. Plan, written by Claude before any code (kept exactly as approved)</td><td><a href="https://github.com/DrewDebugs/RO-Explorer/blob/main/docs/ai-log/01-plan.md"><code>01-plan.md</code></a></td><td>Done</td></tr>
 <tr><td>2. Critique of the plan by a second AI model</td><td><a href="https://github.com/DrewDebugs/RO-Explorer/blob/main/docs/ai-log/02-critique.md"><code>02-critique.md</code></a></td><td id="critique-status">Done (second model: Muse); accept/reject in <code>03-decisions.md</code></td></tr>
-<tr><td>3. Decisions: every change from the plan, and accept/reject of the critique</td><td><a href="https://github.com/DrewDebugs/RO-Explorer/blob/main/docs/ai-log/03-decisions.md"><code>03-decisions.md</code></a></td><td>Ongoing</td></tr>
+<tr><td>3. Decisions: every change from the plan, and accept/reject of the critique</td><td><a href="https://github.com/DrewDebugs/RO-Explorer/blob/main/docs/ai-log/03-decisions.md"><code>03-decisions.md</code></a></td><td>Done: 33 changes from the plan, 12 critique points, 13 second-model points</td></tr>
 <tr><td>4. Implementation by a second AI model (Muse) and comparison of three implementations</td><td><a href="https://github.com/DrewDebugs/RO-Explorer/blob/main/docs/ai-log/04-implementation-comparison.md"><code>04-implementation-comparison.md</code></a></td><td>Done</td></tr>
-<tr><td>5. Prompts, verbatim</td><td><a href="https://github.com/DrewDebugs/RO-Explorer/tree/main/docs/ai-log/prompts"><code>prompts/</code></a></td><td>Done (planning chat, plan-mode prompt, the 39-message build session and the Muse session)</td></tr>
-<tr><td>Sources checklist (every number → source → verified?)</td><td><a href="https://github.com/DrewDebugs/RO-Explorer/blob/main/docs/sources-checklist.md"><code>sources-checklist.md</code></a></td><td>Awaiting human check</td></tr>
+<tr><td>5. Prompts, verbatim</td><td><a href="https://github.com/DrewDebugs/RO-Explorer/tree/main/docs/ai-log/prompts"><code>prompts/</code></a></td><td>Done (planning chat, plan-mode prompt, the 40-message build session and the Muse session)</td></tr>
+<tr><td>Sources checklist (every number → source → verified?)</td><td><a href="https://github.com/DrewDebugs/RO-Explorer/blob/main/docs/sources-checklist.md"><code>sources-checklist.md</code></a></td><td>Done: all 48 entries verified by the student or labelled as assumptions</td></tr>
 </tbody>
 </table>
 </div>
+<h3>Where the student steered</h3>
+<ol>
+<li><strong>Topic.</strong> Asked Claude to review the course lectures for what the instructor wanted,
+then chose reverse osmosis from his list of separations not covered in class.</li>
+<li><strong>Plan.</strong> Wrote the plan-mode prompt with Claude, answered Claude Code's clarifying
+questions (one pressure vessel; van’t Hoff with a Pitzer option; a source for every number) and approved
+the plan before any code was written.</li>
+<li><strong>Build.</strong> Had Claude Code build it milestone by milestone, each ending with passing
+tests, and checked the results in the browser.</li>
+<li><strong>Design.</strong> Asked for the ocean-themed redesign, the animations and the industry
+examples.</li>
+<li><strong>Sources.</strong> Checked all 48 numbers against datasheets, papers and operator pages, and
+decided what to change when they disagreed: the default membrane was refitted to a FilmTec datasheet,
+the costs were anchored to published prices, the electricity price was updated to the EIA average, and a
+supplier and a citation that could not be verified were removed.</li>
+<li><strong>Second model.</strong> Had Muse critique the plan, audit the decisions log and write its own
+model, then accepted or rejected each of its 25 points with a reason.</li>
+</ol>
 <h3>Two AI models, one plan</h3>
 <p>The plan was implemented twice by different AI models: Claude (Opus 5.5) in Claude Code built the
 whole site, and Muse independently wrote the model from the plan and the decisions log. Run on the same
@@ -554,7 +577,7 @@ really 1 %, and three decision entries whose wording did not match what the test
 from the decisions log:</p>
 <ul>
 <li>The plan expected observed rejection to rise steadily with feed pressure. The vessel model
-showed a maximum at high pressure (near 75 bar for the default settings) (§3.5); the explanation was kept as a teaching point.</li>
+showed a maximum at high pressure, near 75 bar for the default settings (§3.5); the explanation was kept as a teaching point.</li>
 <li>The plan’s root-finder tolerance (10⁻¹² m/s) was too loose to show the 4th-order convergence of
 the Runge–Kutta method; it was tightened to 10⁻¹⁶ m/s.</li>
 <li>A test of the recovery limit with 1000× the membrane area failed because the pinch happened
@@ -625,8 +648,12 @@ within millimetres, which the grid could not resolve. With 10× the area, the mo
 </ul>
 
 <h3>AI attribution and license</h3>
-<p>Built by Claude (Anthropic, model Opus 5.5) in Claude Code, directed and checked by a student.
-Source code: <a href="https://github.com/DrewDebugs/RO-Explorer">github.com/DrewDebugs/RO-Explorer</a>.
+<p>Planned and built by Claude (Anthropic): a claude.ai chat for the topic and the planning prompt, and
+Claude Opus 5.5 in Claude Code for the plan, the code, the tests, this page and the deployment. Critique,
+an audit of the decisions log and an independent implementation of the model by Muse. Directed, decided
+and source-checked by the student (GitHub: DrewDebugs). Hosted on GitHub Pages; tested and deployed by
+GitHub Actions. Source code:
+<a href="https://github.com/DrewDebugs/RO-Explorer">github.com/DrewDebugs/RO-Explorer</a>.
 Code is MIT-licensed; text and figures are CC BY 4.0.</p>
 </div>
 </section>
