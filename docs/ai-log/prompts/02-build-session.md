@@ -268,3 +268,9 @@ okay update the prompts with the new prompts as well
 make sure the website is fully ready besides the video because the website has words on it like awaiting human verification
 ```
 *AI: replaced the out-of-date statuses (“Ongoing”, “Awaiting human check”), rewrote the AI statement to name every model and service used, added “Where the student steered” to §7, and updated the attribution.*
+
+**41.**
+```text
+I did the project solo
+```
+*AI: marked the attribution as an individual project.*
