@@ -116,7 +116,7 @@ identical inputs; [`tests/test_second_model.py`](../../tests/test_second_model.p
 
 Muse's notes and its audit of the decisions log (kept verbatim in
 [`second-model/muse-03-decisions-patched.md`](second-model/muse-03-decisions-patched.md)) found real
-issues here as well; they are answered one by one in `03-decisions.md` (M1–M10). Accepted: the molality
+issues here as well; they are answered one by one in `03-decisions.md` (M1–M13). Accepted: the molality
 error is about 1 %, not 2 %; D12 did not say the r_max check disables polarisation and pressure drop;
 D30's $0.79 predates the electricity update ($0.83 now); the default case now shows a polarisation note
 (inlet CP 1.21), which D29 did not mention; the 1.42 vs 1.24 LMH/bar gap in D29 needed an explanation.
