@@ -77,7 +77,7 @@ Then open http://localhost:8000/. The page loads Pyodide, Plotly and KaTeX from 
 ## Still to do (by the student)
 
 - ~~`docs/ai-log/02-critique.md`: second-model critique and accept/reject table~~ (done).
-- `docs/ai-log/prompts/`: build-session prompts done; paste the original planning prompt into `01-planning-session.md`.
+- ~~`docs/ai-log/prompts/`~~ (done: planning and build sessions).
 - ~~`docs/sources-checklist.md`: tick off every number~~ (done: all 48 verified or labelled as assumptions).
 - §8 Presentation: put the YouTube video ID in `data-youtube-id` in `index.html` and the transcript in `docs/transcript.md`.
 
