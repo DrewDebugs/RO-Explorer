@@ -530,12 +530,25 @@ that it can be checked:</p>
 <tr><td>1. Plan, written by Claude before any code (kept exactly as approved)</td><td><a href="https://github.com/DrewDebugs/RO-Explorer/blob/main/docs/ai-log/01-plan.md"><code>01-plan.md</code></a></td><td>Done</td></tr>
 <tr><td>2. Critique of the plan by a second AI model</td><td><a href="https://github.com/DrewDebugs/RO-Explorer/blob/main/docs/ai-log/02-critique.md"><code>02-critique.md</code></a></td><td id="critique-status">Done (second model: Muse); accept/reject in <code>03-decisions.md</code></td></tr>
 <tr><td>3. Decisions: every change from the plan, and accept/reject of the critique</td><td><a href="https://github.com/DrewDebugs/RO-Explorer/blob/main/docs/ai-log/03-decisions.md"><code>03-decisions.md</code></a></td><td>Ongoing</td></tr>
-<tr><td>4. Comparison of two independent implementations</td><td><a href="https://github.com/DrewDebugs/RO-Explorer/blob/main/docs/ai-log/04-implementation-comparison.md"><code>04-implementation-comparison.md</code></a></td><td>Done</td></tr>
+<tr><td>4. Implementation by a second AI model (Muse) and comparison of three implementations</td><td><a href="https://github.com/DrewDebugs/RO-Explorer/blob/main/docs/ai-log/04-implementation-comparison.md"><code>04-implementation-comparison.md</code></a></td><td>Done</td></tr>
 <tr><td>5. Prompts, verbatim</td><td><a href="https://github.com/DrewDebugs/RO-Explorer/tree/main/docs/ai-log/prompts"><code>prompts/</code></a></td><td>Done (planning chat, plan-mode prompt and the 34-message build session)</td></tr>
 <tr><td>Sources checklist (every number → source → verified?)</td><td><a href="https://github.com/DrewDebugs/RO-Explorer/blob/main/docs/sources-checklist.md"><code>sources-checklist.md</code></a></td><td>Awaiting human check</td></tr>
 </tbody>
 </table>
 </div>
+<h3>Two AI models, one plan</h3>
+<p>The plan was implemented twice by different AI models: Claude (Opus 5.5) in Claude Code built the
+whole site, and Muse independently wrote the model from the plan and the decisions log. Run on the same
+inputs at 25 °C, the two agree to better than one part in a hundred million with van’t Hoff osmotic
+pressure, from the default seawater vessel to the pinch preset, and to about 0.01 % with the Pitzer option
+(they assume slightly different water densities). The comparison also caught mistakes on both sides:</p>
+<ul>
+<li><strong>Muse's model ignored temperature:</strong> it defined the temperature correction for the
+membrane permeances but never applied it, so its recovery <em>rose</em> in cold water (45.5 % at 15 °C
+versus 40.4 % here), the opposite of real membranes.</li>
+<li><strong>Muse caught errors in Claude's documentation:</strong> a molality error stated as 2 % that is
+really 1 %, and three decision entries whose wording did not match what the tests actually check.</li>
+</ul>
 <h3>What the tests caught</h3>
 <p>Writing the tests before trusting the model found things the plan got wrong. Three examples
 from the decisions log:</p>

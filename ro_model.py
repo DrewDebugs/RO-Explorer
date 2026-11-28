@@ -122,7 +122,7 @@ def molality_estimate(c):
 
     Assumes 1 m^3 of solution contains RHO_WATER kg of water, i.e. it ignores
     the volume taken up by the salt. At 35 g/L this underestimates the true
-    molality by about 2 % (documented limitation).
+    molality by about 1 % (0.601 vs about 0.607 mol/kg; documented limitation).
     """
     return np.asarray(c, dtype=float) / M_NACL / RHO_WATER
 

@@ -70,7 +70,62 @@ orders of magnitude, and the tests enforce < 10⁻⁵ (default) and < 10⁻⁸ (
 - Both solvers agree on the pinch behaviour: in the near-pinch case the local flux falls
   to a few percent of its inlet value in both.
 
-## Comparison with another AI model
+## Comparison with a second AI model (Muse)
 
-The plan suggested that the user may also compare against an implementation written by a
-different AI model. That comparison is for the user to add here.
+The course requires implementing the plan with **at least two different AI models**. The comparison
+above is between two implementations written by the *same* model (Claude). This section adds an
+implementation by a different model, **Muse**, saved verbatim in
+[`second-model/ro_model_muse.py`](second-model/ro_model_muse.py), with Muse's own notes
+([`second-model/muse-comparison-notes.md`](second-model/muse-comparison-notes.md)).
+
+**How it was made.** The student gave Muse the plan (`01-plan.md`) and the decisions log
+(`03-decisions.md`) and asked for an independent numpy-only model. Muse did not see this repo's code,
+but the decisions log does contain this repo's defaults, numerical choices (Illinois tolerance,
+log-substituted Simpson integral, N = 50 start) and headline results. So Muse's code is independent,
+but it was not blind to the design: agreement on the default case is a strong check of the code, not
+of the design choices.
+
+**How it was compared.** [`second-model/compare.py`](second-model/compare.py) runs both models on
+identical inputs; [`tests/test_second_model.py`](../../tests/test_second_model.py) asserts the results in CI.
+
+### Where the two models agree
+
+| Check | Claude Code | Muse | Difference |
+|---|---|---|---|
+| π, van’t Hoff (0.5–70 g/L) | 29.69 bar at 35 g/L | 29.69 bar | exact |
+| π, Pitzer (0.5–70 g/L) | 27.406 bar at 35 g/L | 27.404 bar | ≤ 1.6 × 10⁻⁴ (water density, below) |
+| SEC_min ideal, r = 0.1–0.9 | 1.143 / 1.065 kWh/m³ at r = 0.5 | same | exact (vH), ≤ 4 × 10⁻⁴ (Pitzer) |
+| Local solver, 216 van’t Hoff cases (35–70 g/L, 40–80 bar, B = 0–0.5 LMH) | — | — | ≤ 3 × 10⁻¹⁰ |
+| Default seawater vessel | 43.723 %, 148.4 mg/L, brine 62.08 g/L, N = 100 | identical | 4 × 10⁻¹² |
+| Brackish preset | 65.848 %, 43.1 mg/L | identical | 6 × 10⁻¹² |
+| Strong polarisation (k = 40 LMH, 70 bar) | 38.846 % | identical | 1 × 10⁻¹² |
+| Pinch preset (site inputs) | 25.748 % | identical | 2 × 10⁻¹¹ |
+| Ideal membrane, 10× area, no CP or pressure drop, vs r_max (45/60/80 bar) | ≤ 7 × 10⁻¹¹ | ≤ 7 × 10⁻¹¹ | both reach r_max |
+| Water cost at $0.08 / $0.096 per kWh | $0.790 / $0.827 | $0.790 / $0.826 | ≤ 0.1 % |
+
+### Where they differ, and which is right
+
+| Difference | Effect | Verdict |
+|---|---|---|
+| **Muse never applies the temperature correction** to A and B in its vessel model (the functions exist but are not called) | At 15 °C Muse gives 45.5 % recovery vs 40.4 % here; at 35 °C, 42.0 % vs 44.8 %. Muse's recovery *rises* in cold water, the wrong direction | **Bug in Muse's model.** Cold water makes membranes less permeable (FilmTec TCF < 1 below 25 °C) |
+| **Muse assigns the FilmTec TCF constants as 3020 K for water and 2640 K for salt** | Would give a 4 % larger A at 35 °C | **Misreading by Muse.** FilmTec Eq. 16a,b use 2640 K above 25 °C and 3020 K below, for permeability; Eq. 19 applies the same factor to salt passage (verified by the student, S11) |
+| Water density in the molality estimate: Muse 1000 kg/m³, here 997.05 | π (Pitzer) differs by ≤ 1.6 × 10⁻⁴; local flux by up to 0.3 % where the net driving pressure is almost zero (70 g/L, 55 bar) | Both are approximations; 997.05 is the density of water at 25 °C. Neither changes any result shown on the site |
+| Pinch position: 4.92 m here (interpolated between grid nodes) vs 4.98 m (Muse: first node below 1 % of inlet flux) with the same inputs | 0.06 m, under one grid step (0.07 m) | Definition only. Muse's own pinch preset (3.6 m) used A = 1.4, k = 180 LMH and a 1.5 bar drop, not the site's preset (A = 1.0, k = 2000 LMH, no drop) |
+
+### What the second model caught in this repo
+
+Muse's notes and its audit of the decisions log (kept verbatim in
+[`second-model/muse-03-decisions-patched.md`](second-model/muse-03-decisions-patched.md)) found real
+issues here as well; they are answered one by one in `03-decisions.md` (M1–M10). Accepted: the molality
+error is about 1 %, not 2 %; D12 did not say the r_max check disables polarisation and pressure drop;
+D30's $0.79 predates the electricity update ($0.83 now); the default case now shows a polarisation note
+(inlet CP 1.21), which D29 did not mention; the 1.42 vs 1.24 LMH/bar gap in D29 needed an explanation.
+
+### Summary
+
+| | Claude Code (Opus 5.5) | Muse |
+|---|---|---|
+| Scope | Full site: model, page, plots, validation panel, CI, 116 tests | Model and economics only (one file), with a smoke check |
+| Physics at 25 °C | Reference | Agrees to 10⁻⁸ or better on every van’t Hoff vessel case; about 10⁻⁴ with Pitzer (water density) |
+| Errors found | Wrong molality-error estimate (2 % → 1 %); unclear wording in three decision entries | Temperature correction never applied; TCF constants misassigned |
+| Found by | Muse's audit | This comparison |
